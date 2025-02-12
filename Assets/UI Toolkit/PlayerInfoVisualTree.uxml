@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/PlayerInfoStyle.uss?fileID=7433441132597879392&amp;guid=2f095959ad62dbc43879e17555944780&amp;type=3#PlayerInfoStyle" />
+    <ui:TextField picking-mode="Ignore" label="State" value="poop" name="State" class="info" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+    <ui:FloatField label="Velocity" value="42.2" name="Velocity" class="info" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0);" />
+</ui:UXML>
