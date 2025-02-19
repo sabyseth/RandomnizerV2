@@ -2,9 +2,11 @@
     width: auto;
     font-size: 100px;
     color: rgb(255, 255, 255);
-    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&guid=e3265ab4bf004d28a9537516768c1c75&type=3#LiberationSans");
+    -unity-font: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=eb550c1daa1714c9eaa4f3ce41d55aea&type=3#NotInter-Regular");
     -unity-font-definition: initial;
     -unity-text-align: upper-center;
+    translate: 0 50px;
+    background-image: none;
 }
 
 .button {
@@ -19,6 +21,8 @@
     justify-content: flex-start;
     align-self: center;
     transition-duration: 0.3s;
+    transform-origin: center;
+    translate: 0 50px;
 }
 
 .button:hover {
