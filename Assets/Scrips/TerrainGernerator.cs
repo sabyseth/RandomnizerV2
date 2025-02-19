@@ -15,32 +15,20 @@ public class TerrainGenerator : MonoBehaviour
 
     [Header("Flat Spot Settings")]
     public Vector2 flatSpotSize = new Vector2(20, 20);
+    private Vector2 flatSpotPosition;
 
     private Terrain terrain;
-    private Vector2 flatSpotPosition;
 
     void Start()
     {
         offsetX = Random.Range(0f, 9999f);
         offsetY = Random.Range(0f, 9999f);
+
         treeGeneration = GetComponent<TreeGeneration>();
         terrain = GetComponent<Terrain>();
-        GenerateTerrainWithMaterial();
-    }
 
-    public void SetFlatSpot(Vector3 buildingWorldPosition)
-    {
-        Debug.LogError(buildingWorldPosition.x);
-        if (terrain == null) return;
-
-        TerrainData terrainData = terrain.terrainData;
-        Vector3 terrainSize = terrainData.size;
-
-        // Convert world position to terrain heightmap position
-        float normalizedX = (buildingWorldPosition.x - terrain.transform.position.x) / terrainSize.x;
-        float normalizedZ = (buildingWorldPosition.z - terrain.transform.position.z) / terrainSize.z;
-
-        flatSpotPosition = new Vector2(normalizedX * width, normalizedZ * height);
+        // Pick a random spot for the flat area
+        flatSpotPosition = new Vector2(Random.Range(50, width - 50), Random.Range(50, height - 50));
 
         GenerateTerrainWithMaterial();
     }
@@ -69,27 +57,26 @@ public class TerrainGenerator : MonoBehaviour
     float[,] GenerateHeights()
     {
         float[,] heights = new float[width, height];
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                heights[x, y] = CalculateHeightWithFlatSpot(x, y);
+                // Normal terrain generation
+                float heightValue = Mathf.PerlinNoise((x + offsetX) / scale, (y + offsetY) / scale);
+
+                // Flatten a specific area
+                if (x > flatSpotPosition.x - flatSpotSize.x / 2 && x < flatSpotPosition.x + flatSpotSize.x / 2 &&
+                    y > flatSpotPosition.y - flatSpotSize.y / 2 && y < flatSpotPosition.y + flatSpotSize.y / 2)
+                {
+                    heightValue = 0.2f; // Lower flat height value
+                }
+
+                heights[x, y] = heightValue;
             }
         }
+
         return heights;
-    }
-
-    float CalculateHeightWithFlatSpot(int x, int y)
-    {
-        if (x >= flatSpotPosition.x - flatSpotSize.x / 2 && x <= flatSpotPosition.x + flatSpotSize.x / 2 &&
-            y >= flatSpotPosition.y - flatSpotSize.y / 2 && y <= flatSpotPosition.y + flatSpotSize.y / 2)
-        {
-            return 0.5f / depth;
-        }
-
-        float xCoord = (float)x / width * scale + offsetX;
-        float yCoord = (float)y / height * scale + offsetY;
-        return Mathf.PerlinNoise(xCoord, yCoord);
     }
 
     void AssignRandomMaterial()
@@ -104,5 +91,10 @@ public class TerrainGenerator : MonoBehaviour
         {
             Debug.LogError("No materials assigned to terrainMaterials array.");
         }
+    }
+
+    public Vector3 GetFlatSpotCenter()
+    {
+        return new Vector3(flatSpotPosition.x, 0, flatSpotPosition.y);
     }
 }
