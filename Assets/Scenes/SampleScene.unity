@@ -960,13 +960,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 5482010343165694956, guid: f96787cf5a4884cafabbb576bbdcb121, type: 3}
-  spawnPoint: {x: 144, y: -10, z: 100}
-  minSpawnPosition: {x: 256, y: -65, z: 0}
-  maxSpawnPosition: {x: 0, y: -65, z: 256}
+  minBuildings: 1
+  maxBuildings: 5
+  minSpawnPosition: {x: 256, y: -60, z: 0}
+  maxSpawnPosition: {x: 0, y: -60, z: 256}
   groundLayer:
     serializedVersion: 2
     m_Bits: 4294967295
-  raycastHeight: 10
+  raycastHeight: 5
+  flattenRadius: 10
 --- !u!4 &1656905712
 Transform:
   m_ObjectHideFlags: 0
@@ -1024,7 +1026,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1e025389d38224f4dab88b01018241c2, type: 2}
   - {fileID: 2100000, guid: ff7fd5ed0b8abad49a5bfb4727049a3c, type: 2}
   - {fileID: 2100000, guid: 6867923e6c6e59c44b0835b1529e730b, type: 2}
-  flatSpotSize: {x: 40, y: 40}
 --- !u!154 &1664299322
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -1094,7 +1095,7 @@ Transform:
   m_GameObject: {fileID: 1664299320}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7515472, y: 0.07529482, z: -0.051441897, w: 0.6533462}
-  m_LocalPosition: {x: -81.26605, y: -68.3, z: -117.23567}
+  m_LocalPosition: {x: 0, y: -68.3, z: 0}
   m_LocalScale: {x: 256, y: 1, z: 256}
   m_ConstrainProportionsScale: 0
   m_Children: []
