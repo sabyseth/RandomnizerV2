@@ -1,0 +1,8 @@
+.info {
+    left: 0;
+    top: 80%;
+    flex-direction: row;
+    align-self: flex-start;
+    font-size: 29px;
+    -unity-text-align: middle-left;
+}

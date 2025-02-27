@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/PlayerHUDUSS.uss?fileID=7433441132597879392&amp;guid=ac7aecbe77fd04ba9ad3b31f9ea528d2&amp;type=3#PlayerHUDUSS" />
+    <ui:TextField picking-mode="Ignore" label="State" name="State" readonly="true" focusable="false" class="info" style="height: 10%;" />
+    <ui:FloatField label="Velocity" name="Velocity" readonly="true" focusable="false" class="info" style="height: 10%;" />
+</ui:UXML>
