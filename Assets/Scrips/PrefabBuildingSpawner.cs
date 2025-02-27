@@ -61,7 +61,7 @@ public class PrefabBuildingSpawner : MonoBehaviour
         spawnedBuildings.Clear();
 
         int buildingCount = Random.Range(minBuildings, maxBuildings + 1);
-        float minBuildingDistance = 15f; // Set a minimum distance between buildings
+        float minBuildingDistance = 50f; // Set a minimum distance between buildings
 
         for (int i = 0; i < buildingCount; i++)
         {

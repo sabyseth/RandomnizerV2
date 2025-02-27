@@ -7,26 +7,25 @@ public class WorldGeneration : MonoBehaviour
     public static List<GameObject> GeneratedTiles = new List<GameObject>();
 
     [SerializeField] private GameObject tilePrefab;
-    private int baseRadius = 128;
-    private int adjustedRadius;
+    private int fixedRadius = 160; // Fixed terrain size
     private List<Vector3> doorPositions = new List<Vector3>();
+    private List<GameObject> pathTiles = new List<GameObject>(); // Store path tiles
 
     void Start()
     {
-        StartCoroutine(AdjustRadiusAndGenerateWorld());
+        StartCoroutine(GenerateWorldWithFixedRadius());
     }
 
-    IEnumerator AdjustRadiusAndGenerateWorld()
+    IEnumerator GenerateWorldWithFixedRadius()
     {
         yield return StartCoroutine(FindDoors());
-        adjustedRadius = CalculateAdjustedRadius();
-        GenerateWorld(adjustedRadius);
+        GenerateWorld(fixedRadius);
     }
 
     IEnumerator FindDoors()
     {
         yield return new WaitForSeconds(2f); // Wait for objects to spawn
-        
+
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjects)
         {
@@ -35,23 +34,6 @@ public class WorldGeneration : MonoBehaviour
                 doorPositions.Add(obj.transform.position);
             }
         }
-    }
-
-    int CalculateAdjustedRadius()
-    {
-        if (doorPositions.Count == 0)
-            return baseRadius;
-
-        float maxDistance = 0f;
-        foreach (var door in doorPositions)
-        {
-            float distance = Vector3.Distance(Vector3.zero, door);
-            if (distance > maxDistance)
-            {
-                maxDistance = distance;
-            }
-        }
-        return Mathf.CeilToInt(maxDistance / 1.5f) + 10;
     }
 
     void GenerateWorld(int radius)
@@ -73,7 +55,7 @@ public class WorldGeneration : MonoBehaviour
         pathGenerator.AssignDoorTiles(doorPositions);
         pathGenerator.GeneratePath();
 
-        List<GameObject> pathTiles = pathGenerator.GetGeneratedPath;
+        pathTiles = pathGenerator.GetGeneratedPath; // Store path tiles
 
         // Disable all tiles that are NOT in the path
         foreach (var tile in GeneratedTiles)
@@ -81,6 +63,28 @@ public class WorldGeneration : MonoBehaviour
             if (!pathTiles.Contains(tile))
             {
                 tile.SetActive(false);
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw the terrain boundary
+        Gizmos.color = Color.red;
+        Vector3 center = new Vector3((fixedRadius - 1) * 1.5f / 2, 0, (fixedRadius - 1) * 1.5f / 2);
+        Vector3 size = new Vector3(fixedRadius * 1.5f, 0.1f, fixedRadius * 1.5f);
+        Gizmos.DrawWireCube(center, size);
+
+        // Draw path tiles
+        if (pathTiles == null || pathTiles.Count == 0)
+            return;
+
+        Gizmos.color = Color.green; // Path tiles color
+        foreach (var tile in pathTiles)
+        {
+            if (tile != null)
+            {
+                Gizmos.DrawWireCube(tile.transform.position, new Vector3(1.5f, 0.1f, 1.5f));
             }
         }
     }
