@@ -38,7 +38,7 @@ public struct CharacterInput
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
 
-    public UnityEvent OnGunShoot;
+    //public UnityEvent OnGunShoot;
     public float FireCoolDown;
     public bool Automatic;
     public float CurrentCoolDown;
@@ -120,16 +120,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             _state.Stance = Stance.Stand; // Fallback if Sprint is released
         }
-         if (input.Fire)
-             {
-                 if (CurrentCoolDown <= 0f)
-                 {
-                     OnGunShoot?.Invoke();
-    
-                     CurrentCoolDown = FireCoolDown;
-                 }
-             }
-             CurrentCoolDown -= Time.deltaTime;
+      //   if (input.Fire)
+        //     {
+          //       if (CurrentCoolDown <= 0f)
+           //      {
+            //         OnGunShoot?.Invoke();
+    //
+             //        CurrentCoolDown = FireCoolDown;
+             //    }
+            // }
+            // CurrentCoolDown -= Time.deltaTime;
         _requestedRotation = input.Rotation;
         // Take the 2d input veector and create a 3d movement vector on the XZ plane.
         _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);

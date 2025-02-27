@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
             Sprint      = input.Sprint.IsPressed()
                 ? SprintInput.Toggle
                 : SprintInput.None,
-            Fire        = input.Fire.WasPressedThisFrame()
+            Fire        = input.Fire.IsPressed()
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);

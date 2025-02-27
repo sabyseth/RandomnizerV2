@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 public class GunDamage : MonoBehaviour
 {
+    public PlayerInput playerInput;
+    private InputAction fireAction;
     public float Damage;
     public Recoil RecoilObject;
     public float BulletRange;
@@ -14,49 +17,66 @@ public class GunDamage : MonoBehaviour
     public float bulletSpeed = 10;
     public TrailRenderer BulletTrail;
     public float recoilamount = 0.05f;
-
-    private void Start()
-    {
-        PlayerCamera = Camera.main.transform;
+    public UnityEvent OnGunShoot;
+    public float FireCoolDown;
+    public bool Automatic;
+    public float CurrentCoolDown;
     
-
-   }
-
-   public void Shoot()
-{
-    MuzzleFlash.Play();
-    RecoilObject.recoil += recoilamount;
-    Debug.Log("Shot");
-
-    // Create the ray using the camera's forward direction
-    Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);
-    Debug.DrawRay(PlayerCamera.position, PlayerCamera.forward, Color.green);
-
-    // Check if the ray hits anything
-    if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
+      private void Awake()
     {
-        // Spawn the bullet trail
-        TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        StartCoroutine(SpawnTrail(trail, hitInfo.point)); // Use the hit point
+        // Get the Fire action from the input asset
+        fireAction = playerInput.actions["Fire"];
+        PlayerCamera = Camera.main.transform;
 
-        // Check if the hit object has an Entity component
-        if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
+        
+    }
+
+   private void Update()
+    {
+        // Check if the fire action is triggered
+        if (fireAction.IsPressed()) // Use IsPressed for continuous fire when holding
         {
-            enemy.Health -= Damage;
-            //Debug.Log("Hit entity");
+            if (CurrentCoolDown <= 0f)
+            {
+                Shoot(); // Trigger the shooting event
+                CurrentCoolDown = FireCoolDown; // Reset cooldown after shooting
+            }
         }
-    }
-    else
-    {
-        // If no object is hit, calculate the endpoint based on the bullet range
-        Vector3 missPoint = gunRay.origin + gunRay.direction * BulletRange;
 
-        // Spawn the bullet trail
-        TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        StartCoroutine(SpawnTrail(trail, missPoint)); // Use the calculated miss point
+        // Decrease cooldown each frame
+        CurrentCoolDown -= Time.deltaTime;
     }
+  public void Shoot(){
+   CurrentCoolDown = FireCoolDown;
+   MuzzleFlash.Play();
+   RecoilObject.recoil += recoilamount;
+   Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);
+   Debug.Log("Shot");
+   //Debug.DrawRay(PlayerCamera.position, PlayerCamera.forward);
+   // Check if the ray hits anything
+   if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
+   {
+       // Spawn the bullet trail
+       TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+       StartCoroutine(SpawnTrail(trail, hitInfo.point)); // Use the hit point
+       // Check if the hit object has an Entity component
+       if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
+       {
+           enemy.Health -= Damage;
+           //Debug.Log("Hit entity");
+       }
+   }
+   else
+   {
+       // If no object is hit, calculate the endpoint based on the bullet range
+       Vector3 missPoint = gunRay.origin + gunRay.direction * BulletRange;
+
+
+       // Spawn the bullet trail
+       TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+       StartCoroutine(SpawnTrail(trail, missPoint)); // Use the calculated miss point
+   }
 }
-
 private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 targetPoint)
     {
         float distance = Vector3.Distance(Trail.transform.position, targetPoint);
