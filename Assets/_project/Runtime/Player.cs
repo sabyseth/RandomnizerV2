@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using Unity.Netcode;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehavior
 {
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -38,6 +39,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {  
+        Debug.Log("sdlkfjsdlfk");
+        if(!isOwner) return;
+        if(!isLocalPlayer) return;
         var input = _inputActions.Gameplay;
         var deltaTime = Time.deltaTime;
 
