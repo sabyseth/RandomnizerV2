@@ -34,6 +34,8 @@ public struct CharacterInput
     public CrouchInput Crouch;
     public SprintInput Sprint;
     public bool Fire;
+
+    public bool Scope { get; internal set; }
 }
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
