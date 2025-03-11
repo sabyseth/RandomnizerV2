@@ -2,8 +2,9 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.Netcode;
 
-public class CharacterInfo : MonoBehaviour
+public class CharacterInfo : NetworkBehaviour
 {
     [SerializeField] private float floatValue = 10f;
     [SerializeField] private String stance;

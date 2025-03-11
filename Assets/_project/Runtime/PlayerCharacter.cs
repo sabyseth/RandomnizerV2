@@ -1,6 +1,7 @@
 using UnityEngine;
 using KinematicCharacterController;
 using UnityEngine.Events;
+using Unity.Netcode;
 
 public enum CrouchInput
 {
@@ -35,7 +36,7 @@ public struct CharacterInput
     public SprintInput Sprint;
     public bool Fire;
 }
-public class PlayerCharacter : MonoBehaviour, ICharacterController
+public class PlayerCharacter : NetworkBehaviour, ICharacterController
 {
 
     public UnityEvent OnGunShoot;

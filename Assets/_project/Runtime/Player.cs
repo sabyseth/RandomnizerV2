@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using Unity.Netcode;
 
-public class Player : NetworkBehavior
+public class Player : NetworkBehaviour
 {
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -40,8 +40,8 @@ public class Player : NetworkBehavior
     void Update()
     {  
         Debug.Log("sdlkfjsdlfk");
-        if(!isOwner) return;
-        if(!isLocalPlayer) return;
+        //if(!isOwner) return;
+        //if(!isLocalPlayer) return;
         var input = _inputActions.Gameplay;
         var deltaTime = Time.deltaTime;
 
