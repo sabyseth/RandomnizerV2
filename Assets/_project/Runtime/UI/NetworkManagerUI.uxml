@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/buttonselector.uss?fileID=7433441132597879392&amp;guid=032df5eddffda4021a5bb441497f5fab&amp;type=3#buttonselector" />
+    <ui:VisualElement style="align-self: flex-end; width: 30%; height: 100%;">
+        <ui:Button text="Server" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Server" />
+        <ui:Button text="Host" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Host" />
+        <ui:Button text="Client" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Client" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -11,7 +11,7 @@ public class Player : NetworkBehaviour
     [SerializeField] private CameraSpring cameraSpring;
     [SerializeField] private CameraLean cameraLean;
     [Space]
-//[SerializeField] private Volume volume;
+    //[SerializeField] private Volume volume;
     //[SerializeField] private StanceVignette stanceVignette;
 
     private PlayerInputActoions _inputActions;
@@ -39,7 +39,7 @@ public class Player : NetworkBehaviour
 
     void Update()
     {  
-        Debug.Log("sdlkfjsdlfk");
+        //Debug.Log("sdlkfjsdlfk");
         //if(!isOwner) return;
         //if(!isLocalPlayer) return;
         var input = _inputActions.Gameplay;
