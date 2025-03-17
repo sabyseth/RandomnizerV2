@@ -2,6 +2,7 @@
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=5634a699ad06e444eb2f7f406d999e11&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Container" style="flex-grow: 1;">
         <ui:Label tabindex="-1" text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" class="header" />
-        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="height: 92px; width: 335px;" />
+        <ui:Button text="START" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartGameButton" class="button" style="border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; background-color: rgb(127, 182, 231);" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="button" />
     </ui:VisualElement>
 </ui:UXML>
