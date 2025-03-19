@@ -5,4 +5,5 @@
     align-self: flex-start;
     font-size: 29px;
     -unity-text-align: middle-left;
+    width: 25%;
 }

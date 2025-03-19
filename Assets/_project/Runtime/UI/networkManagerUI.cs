@@ -46,6 +46,7 @@ public class networkManagerUI : MonoBehaviour
     {
         if (evt.currentTarget.Equals(_server))
         {
+            Debug.Log("Server Clicked");
             NetworkManager.Singleton.StartServer();
         };
 
