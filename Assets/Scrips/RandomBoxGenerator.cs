@@ -192,7 +192,7 @@ public class TwoExternalRooms : RoomConfiguration
         // Create first (larger) room
         Transform room1 = new GameObject("Room1").transform;
         room1.SetParent(parent);
-        CreateRoom(room1, new Vector3(-width / 2 + primaryRoomWidth / 2, 0, 0), primaryRoomWidth, roomHeight, roomLength, true);
+        CreateRoom(room1, new Vector3(-width / 2 + primaryRoomWidth / 2, 0, 0), primaryRoomWidth, roomHeight, roomLength, false);
 
         // Create second (smaller) room
         Transform room2 = new GameObject("Room2").transform;
@@ -210,15 +210,24 @@ public class TwoExternalRooms : RoomConfiguration
                    position + new Vector3(0, -wallThickness / 2, 0), roomParent);
         CreateWall("Wall_Left", new Vector3(wallThickness, roomHeight, roomLength), 
                    position + new Vector3(-roomWidth / 2, roomHeight / 2, 0), roomParent);
-        CreateWall("Wall_Right", new Vector3(wallThickness, roomHeight, roomLength), 
+        if (hasExternalDoor)
+        {
+            CreateWall("Wall_Right", new Vector3(wallThickness, roomHeight, roomLength), 
                    position + new Vector3(roomWidth / 2, roomHeight / 2, 0), roomParent);
+        }
+    
         CreateWall("Wall_Back", new Vector3(roomWidth, roomHeight, wallThickness), 
                    position + new Vector3(0, roomHeight / 2, roomLength / 2), roomParent);
 
         if (hasExternalDoor)
         {
+            CreateWall("Wall_Front", new Vector3(roomWidth, roomHeight, wallThickness), 
+                   position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent);
+        }
+        else
+        {
             CreateWallWithDoor("Wall_Front", new Vector3(roomWidth, roomHeight, wallThickness),
-                position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent, Vector3.forward);
+                    position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent, Vector3.forward);
         }
     }
 }
