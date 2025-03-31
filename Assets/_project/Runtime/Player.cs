@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using Unity.Netcode;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraSpring cameraSpring;
     [SerializeField] private CameraLean cameraLean;
     [Space]
-//[SerializeField] private Volume volume;
+    //[SerializeField] private Volume volume;
     //[SerializeField] private StanceVignette stanceVignette;
 
     private PlayerInputActoions _inputActions;
@@ -38,6 +39,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {  
+        //Debug.Log("sdlkfjsdlfk");
+        //if(!isOwner) return;
+        //if(!isLocalPlayer) return;
         var input = _inputActions.Gameplay;
         var deltaTime = Time.deltaTime;
 
