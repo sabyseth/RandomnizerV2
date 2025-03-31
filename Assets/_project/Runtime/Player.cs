@@ -40,7 +40,7 @@ public class Player : NetworkBehaviour
     void Update()
     {  
         //Debug.Log("sdlkfjsdlfk");
-        //if(!isOwner) return;
+        if(!IsOwner) return;
         //if(!isLocalPlayer) return;
         var input = _inputActions.Gameplay;
         var deltaTime = Time.deltaTime;
