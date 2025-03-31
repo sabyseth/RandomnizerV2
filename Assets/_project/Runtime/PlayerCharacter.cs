@@ -1,6 +1,7 @@
 using UnityEngine;
 using KinematicCharacterController;
 using UnityEngine.Events;
+using Unity.Netcode;
 
 public enum CrouchInput
 {
@@ -37,7 +38,7 @@ public struct CharacterInput
 
     public bool Scope { get; internal set; }
 }
-public class PlayerCharacter : MonoBehaviour, ICharacterController
+public class PlayerCharacter : NetworkBehaviour, ICharacterController
 {
 
     //public UnityEvent OnGunShoot;

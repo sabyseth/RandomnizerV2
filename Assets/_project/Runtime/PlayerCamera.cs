@@ -1,11 +1,12 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public struct CameraInput
 {
     public Vector2 Look;
 }
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
     [SerializeField] private float sensitivity = 0.1f;
     private Vector3 _eulerAngles;

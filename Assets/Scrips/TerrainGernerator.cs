@@ -13,11 +13,7 @@ public class TerrainGenerator : MonoBehaviour
     public Material[] terrainMaterials;
     private TreeGeneration treeGeneration;
 
-    [Header("Flat Spot Settings")]
-    public Vector2 flatSpotSize = new Vector2(20, 20);
-
     private Terrain terrain;
-    private Vector2 flatSpotPosition;
 
     void Start()
     {
@@ -25,23 +21,6 @@ public class TerrainGenerator : MonoBehaviour
         offsetY = Random.Range(0f, 9999f);
         treeGeneration = GetComponent<TreeGeneration>();
         terrain = GetComponent<Terrain>();
-        GenerateTerrainWithMaterial();
-    }
-
-    public void SetFlatSpot(Vector3 buildingWorldPosition)
-    {
-        Debug.LogError(buildingWorldPosition.x);
-        if (terrain == null) return;
-
-        TerrainData terrainData = terrain.terrainData;
-        Vector3 terrainSize = terrainData.size;
-
-        // Convert world position to terrain heightmap position
-        float normalizedX = (buildingWorldPosition.x - terrain.transform.position.x) / terrainSize.x;
-        float normalizedZ = (buildingWorldPosition.z - terrain.transform.position.z) / terrainSize.z;
-
-        flatSpotPosition = new Vector2(normalizedX * width, normalizedZ * height);
-
         GenerateTerrainWithMaterial();
     }
 
@@ -73,23 +52,12 @@ public class TerrainGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                heights[x, y] = CalculateHeightWithFlatSpot(x, y);
+                float xCoord = (float)x / width * scale + offsetX;
+                float yCoord = (float)y / height * scale + offsetY;
+                heights[x, y] = Mathf.PerlinNoise(xCoord, yCoord);
             }
         }
         return heights;
-    }
-
-    float CalculateHeightWithFlatSpot(int x, int y)
-    {
-        if (x >= flatSpotPosition.x - flatSpotSize.x / 2 && x <= flatSpotPosition.x + flatSpotSize.x / 2 &&
-            y >= flatSpotPosition.y - flatSpotSize.y / 2 && y <= flatSpotPosition.y + flatSpotSize.y / 2)
-        {
-            return 0.5f / depth;
-        }
-
-        float xCoord = (float)x / width * scale + offsetX;
-        float yCoord = (float)y / height * scale + offsetY;
-        return Mathf.PerlinNoise(xCoord, yCoord);
     }
 
     void AssignRandomMaterial()
