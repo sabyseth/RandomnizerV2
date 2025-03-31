@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -15,41 +14,55 @@ public class Scope : MonoBehaviour
     private bool IsScoped = false;
     private InputAction fireAction;
     private InputAction shootAction;
+
     void Awake()
     {
         fireAction = playerInput.actions["Scope"];
-        scopeOverlay.SetActive(false);
         shootAction = playerInput.actions["Fire"];
+        
+        // Ensure that the scope overlay is off when the script starts
+        scopeOverlay.SetActive(false);
     }
-    void Update(){
-         if (fireAction.WasPressedThisFrame()) 
+
+    void Update()
+    {
+        // Toggle scope on pressing scope button
+        if (fireAction.WasPressedThisFrame())
         {
-            IsScoped = !IsScoped;
-            animator.SetBool("Scoped", IsScoped);
-            scopeOverlay.SetActive(IsScoped);
-            if (IsScoped){
-            StartCoroutine(OnScoped());
+            if (!IsScoped)
+            {
+                IsScoped = true;
+                animator.SetBool("Scoped", IsScoped);
+                scopeOverlay.SetActive(true);  // Enable overlay when scoped in
+                StartCoroutine(OnScoped());
             }
-            else{
-            Unscoped();
+            else
+            {
+                Unscoped();
             }
-    }
-          if (shootAction.WasPressedThisFrame() && IsScoped)
-        {
-            Unscoped();
-            animator.SetBool("Scoped", false);
         }
-}
-void Unscoped(){
-scopeOverlay.SetActive(false);
-weaponCamera.SetActive(true);
-mainCamera.fieldOfView = normalFOV;
-}
-IEnumerator OnScoped(){
-        normalFOV = mainCamera.fieldOfView; 
-        mainCamera.fieldOfView = scopedFOV; 
-        scopeOverlay.SetActive(true);
-        yield return new WaitForSeconds(0.075f); 
+
+        // If shooting while scoped, immediately un-scope
+        if (shootAction.WasPressedThisFrame() && IsScoped)
+        {
+            Unscoped();
+        }
+    }
+
+    void Unscoped()
+    {
+        IsScoped = false;
+        scopeOverlay.SetActive(false);  // Disable overlay when unscoped
+        weaponCamera.SetActive(true);
+        mainCamera.fieldOfView = normalFOV;
+        animator.SetBool("Scoped", false);
+    }
+
+    IEnumerator OnScoped()
+    {
+        normalFOV = mainCamera.fieldOfView;
+        mainCamera.fieldOfView = scopedFOV;
         weaponCamera.SetActive(false);
-}
+        yield return new WaitForSeconds(0.075f);
+    }
 }

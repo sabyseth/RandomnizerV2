@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desert Eagle 1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4938319758659922345, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5111203784045928097, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.96
