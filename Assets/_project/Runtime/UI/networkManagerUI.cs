@@ -1,14 +1,19 @@
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class networkManagerUI : MonoBehaviour
+public class networkManagerUI : NetworkBehaviour
 {
+    //[SerializeField] private String Role;
+
     private UIDocument _document;
     private Button _server;
     private Button _client;
     private Button _host;
+    public TextField networkRole;
+    public String role;
     private List<Button> _serverUIButtons = new List<Button>();
 
     private void Awake()
@@ -32,6 +37,7 @@ public class networkManagerUI : MonoBehaviour
 
         
     }
+   
     private void OnDisable()
     {
         _server.UnregisterCallback<ClickEvent>(onServerClick);
@@ -59,11 +65,30 @@ public class networkManagerUI : MonoBehaviour
         {
             NetworkManager.Singleton.StartHost();
         };
+        if(IsHost)
+        {
+            role = "Host";
+            Debug.Log(role);
+        }
+        else if(IsClient)
+        {
+            role = "Client";
+            Debug.Log(role);
+
+        }
+        else
+        {
+            role = "server";
+            Debug.Log(role);
+        }
     }
 
     private void OnAllButtonsClick(ClickEvent evt)
     {
-
+        
     }
-    
+    // void Update()
+    // {
+
+    // }
 }
