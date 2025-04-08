@@ -192,7 +192,7 @@ public class TwoExternalRooms : RoomConfiguration
         float primaryRoomWidth = width * Random.Range(0.5f, 0.8f);
         float secondaryRoomWidth = width - primaryRoomWidth;
         float roomHeight = height;
-        
+
         // Make sure the lengths are different by at least 20%
         float primaryRoomLength = length;
         float secondaryRoomLength;
@@ -204,15 +204,15 @@ public class TwoExternalRooms : RoomConfiguration
         Transform room1 = new GameObject("Room1").transform;
         room1.SetParent(parent);
         CreateRoom(room1, new Vector3(-width / 2 + primaryRoomWidth / 2, 0, 0), 
-                  primaryRoomWidth, roomHeight, primaryRoomLength, false);
+                  primaryRoomWidth, roomHeight, primaryRoomLength, false, includeLeftWall: true);
 
-        // Create second room
+        // Create second room - centered vertically (z-axis) with Room1, no left wall
         Transform room2 = new GameObject("Room2").transform;
         room2.SetParent(parent);
         CreateRoom(room2, new Vector3(width / 2 - secondaryRoomWidth / 2, 0, 0), 
-                  secondaryRoomWidth, roomHeight, secondaryRoomLength, true);
+                  secondaryRoomWidth, roomHeight, secondaryRoomLength, true, includeLeftWall: false);
 
-        // Calculate the position for the shared wall based on which room is longer
+        // Calculate the position for the shared wall based on which room is shorter
         float sharedWallZ = 0;
         if (primaryRoomLength > secondaryRoomLength)
         {
@@ -224,40 +224,48 @@ public class TwoExternalRooms : RoomConfiguration
         }
 
         // Create the thicker shared internal wall with a door
-        CreateWallWithDoor("SharedWall", new Vector3(internalWallThickness, roomHeight, Mathf.Min(primaryRoomLength, secondaryRoomLength)),
-            new Vector3(-width / 2 + primaryRoomWidth + (internalWallThickness / 2), roomHeight / 2, sharedWallZ - Mathf.Min(primaryRoomLength, secondaryRoomLength)/2), 
-            parent, Vector3.right);
+        // Shared wall spans the entire longer room
+        float sharedWallLength = Mathf.Max(primaryRoomLength, secondaryRoomLength);
+        CreateWallWithDoor("SharedWall", 
+        new Vector3(internalWallThickness, roomHeight, sharedWallLength),
+        new Vector3(-width / 2 + primaryRoomWidth + (internalWallThickness / 2), roomHeight / 2, 0),
+        parent, Vector3.right);
+
     }
 
-    void CreateRoom(Transform roomParent, Vector3 position, float roomWidth, float roomHeight, float roomLength, bool hasExternalDoor)
+    void CreateRoom(Transform roomParent, Vector3 position, float roomWidth, float roomHeight, float roomLength, bool hasExternalDoor, bool includeLeftWall)
     {
         CreateWall("Floor", new Vector3(roomWidth, wallThickness, roomLength), 
                    position + new Vector3(0, -wallThickness / 2, 0), roomParent);
         
-        CreateWall("Wall_Left", new Vector3(wallThickness, roomHeight, roomLength), 
-                   position + new Vector3(-roomWidth / 2, roomHeight / 2, 0), roomParent);
-        
+        if (includeLeftWall)
+        {
+            CreateWall("Wall_Left", new Vector3(wallThickness, roomHeight, roomLength), 
+                       position + new Vector3(-roomWidth / 2, roomHeight / 2, 0), roomParent);
+        }
+
         if (hasExternalDoor)
         {
             CreateWall("Wall_Right", new Vector3(wallThickness, roomHeight, roomLength), 
-                   position + new Vector3(roomWidth / 2, roomHeight / 2, 0), roomParent);
+                       position + new Vector3(roomWidth / 2, roomHeight / 2, 0), roomParent);
         }
-    
+
         CreateWall("Wall_Back", new Vector3(roomWidth, roomHeight, wallThickness), 
                    position + new Vector3(0, roomHeight / 2, roomLength / 2), roomParent);
 
         if (hasExternalDoor)
         {
             CreateWall("Wall_Front", new Vector3(roomWidth, roomHeight, wallThickness), 
-                   position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent);
+                       position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent);
         }
         else
         {
             CreateWallWithDoor("Wall_Front", new Vector3(roomWidth, roomHeight, wallThickness),
-                    position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent, Vector3.forward);
+                               position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent, Vector3.forward);
         }
     }
 }
+
 
 
 public class OneInternal : RoomConfiguration

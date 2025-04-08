@@ -1122,7 +1122,7 @@ MonoBehaviour:
   terrainMaterials:
   - {fileID: 2100000, guid: 1e025389d38224f4dab88b01018241c2, type: 2}
   - {fileID: 2100000, guid: ff7fd5ed0b8abad49a5bfb4727049a3c, type: 2}
-  - {fileID: 2100000, guid: 6867923e6c6e59c44b0835b1529e730b, type: 2}
+  - {fileID: 2100000, guid: 09c81ea2cae804bc0b43e4740096a36a, type: 2}
 --- !u!154 &1664299322
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 1908441094}
   - component: {fileID: 1908441095}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RandomRoomGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
