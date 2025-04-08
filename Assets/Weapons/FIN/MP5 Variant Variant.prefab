@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 5061206422390060799}
     - target: {fileID: 124003387771610928, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
       propertyPath: FireCoolDown
-      value: 0.1
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 124003387771610928, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
       propertyPath: recoilamount
@@ -95,6 +95,22 @@ PrefabInstance:
     - target: {fileID: 6250601747668506563, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430895060148040719, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
+      propertyPath: maxTrans_z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430895060148040719, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
+      propertyPath: maxRecoil_x
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430895060148040719, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
+      propertyPath: maxRecoil_y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430895060148040719, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
+      propertyPath: recoilSpeed
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

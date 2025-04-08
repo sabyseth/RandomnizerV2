@@ -89,6 +89,69 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d93999b-fdf2-48ff-9a5d-36239bd55032"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon2"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f4d0769-0bba-412b-99df-fd34a369d49e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon3"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba7d00e4-5708-463f-bdd5-7c3217bfdcbc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon4"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2a853d0-7863-45f5-b54f-8dcd2dcd2a74"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon5"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea817e03-383e-44ea-8884-fb5d87f419d5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon6"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab4d36f0-c7be-4ac8-9e2a-f78f5cee5857"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon7"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ffa247f-73ff-434d-a889-a7bcc455b9a6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +297,83 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""action"": ""Scope"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2438735-dfb2-496a-b07f-56059818e5ca"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""810223bf-3cdb-4984-9866-635ffc074bad"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31106353-f405-4531-8e7b-d3be0bc97e3a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""439c83ed-f7cc-4e40-8c95-d6136c5823f9"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81cbffb2-3000-4b17-91bc-6d727cf59867"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2b5b86f-33c6-4f52-91d2-72a7b70d0b9f"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bf481cf-555a-464a-b2f1-3c952b304b48"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -249,6 +389,13 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_Scope = m_Gameplay.FindAction("Scope", throwIfNotFound: true);
+        m_Gameplay_Weapon1 = m_Gameplay.FindAction("Weapon1", throwIfNotFound: true);
+        m_Gameplay_Weapon2 = m_Gameplay.FindAction("Weapon2", throwIfNotFound: true);
+        m_Gameplay_Weapon3 = m_Gameplay.FindAction("Weapon3", throwIfNotFound: true);
+        m_Gameplay_Weapon4 = m_Gameplay.FindAction("Weapon4", throwIfNotFound: true);
+        m_Gameplay_Weapon5 = m_Gameplay.FindAction("Weapon5", throwIfNotFound: true);
+        m_Gameplay_Weapon6 = m_Gameplay.FindAction("Weapon6", throwIfNotFound: true);
+        m_Gameplay_Weapon7 = m_Gameplay.FindAction("Weapon7", throwIfNotFound: true);
     }
 
     ~@PlayerInputActoions()
@@ -322,6 +469,13 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Sprint;
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_Scope;
+    private readonly InputAction m_Gameplay_Weapon1;
+    private readonly InputAction m_Gameplay_Weapon2;
+    private readonly InputAction m_Gameplay_Weapon3;
+    private readonly InputAction m_Gameplay_Weapon4;
+    private readonly InputAction m_Gameplay_Weapon5;
+    private readonly InputAction m_Gameplay_Weapon6;
+    private readonly InputAction m_Gameplay_Weapon7;
     public struct GameplayActions
     {
         private @PlayerInputActoions m_Wrapper;
@@ -333,6 +487,13 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @Scope => m_Wrapper.m_Gameplay_Scope;
+        public InputAction @Weapon1 => m_Wrapper.m_Gameplay_Weapon1;
+        public InputAction @Weapon2 => m_Wrapper.m_Gameplay_Weapon2;
+        public InputAction @Weapon3 => m_Wrapper.m_Gameplay_Weapon3;
+        public InputAction @Weapon4 => m_Wrapper.m_Gameplay_Weapon4;
+        public InputAction @Weapon5 => m_Wrapper.m_Gameplay_Weapon5;
+        public InputAction @Weapon6 => m_Wrapper.m_Gameplay_Weapon6;
+        public InputAction @Weapon7 => m_Wrapper.m_Gameplay_Weapon7;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -363,6 +524,27 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Scope.started += instance.OnScope;
             @Scope.performed += instance.OnScope;
             @Scope.canceled += instance.OnScope;
+            @Weapon1.started += instance.OnWeapon1;
+            @Weapon1.performed += instance.OnWeapon1;
+            @Weapon1.canceled += instance.OnWeapon1;
+            @Weapon2.started += instance.OnWeapon2;
+            @Weapon2.performed += instance.OnWeapon2;
+            @Weapon2.canceled += instance.OnWeapon2;
+            @Weapon3.started += instance.OnWeapon3;
+            @Weapon3.performed += instance.OnWeapon3;
+            @Weapon3.canceled += instance.OnWeapon3;
+            @Weapon4.started += instance.OnWeapon4;
+            @Weapon4.performed += instance.OnWeapon4;
+            @Weapon4.canceled += instance.OnWeapon4;
+            @Weapon5.started += instance.OnWeapon5;
+            @Weapon5.performed += instance.OnWeapon5;
+            @Weapon5.canceled += instance.OnWeapon5;
+            @Weapon6.started += instance.OnWeapon6;
+            @Weapon6.performed += instance.OnWeapon6;
+            @Weapon6.canceled += instance.OnWeapon6;
+            @Weapon7.started += instance.OnWeapon7;
+            @Weapon7.performed += instance.OnWeapon7;
+            @Weapon7.canceled += instance.OnWeapon7;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -388,6 +570,27 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Scope.started -= instance.OnScope;
             @Scope.performed -= instance.OnScope;
             @Scope.canceled -= instance.OnScope;
+            @Weapon1.started -= instance.OnWeapon1;
+            @Weapon1.performed -= instance.OnWeapon1;
+            @Weapon1.canceled -= instance.OnWeapon1;
+            @Weapon2.started -= instance.OnWeapon2;
+            @Weapon2.performed -= instance.OnWeapon2;
+            @Weapon2.canceled -= instance.OnWeapon2;
+            @Weapon3.started -= instance.OnWeapon3;
+            @Weapon3.performed -= instance.OnWeapon3;
+            @Weapon3.canceled -= instance.OnWeapon3;
+            @Weapon4.started -= instance.OnWeapon4;
+            @Weapon4.performed -= instance.OnWeapon4;
+            @Weapon4.canceled -= instance.OnWeapon4;
+            @Weapon5.started -= instance.OnWeapon5;
+            @Weapon5.performed -= instance.OnWeapon5;
+            @Weapon5.canceled -= instance.OnWeapon5;
+            @Weapon6.started -= instance.OnWeapon6;
+            @Weapon6.performed -= instance.OnWeapon6;
+            @Weapon6.canceled -= instance.OnWeapon6;
+            @Weapon7.started -= instance.OnWeapon7;
+            @Weapon7.performed -= instance.OnWeapon7;
+            @Weapon7.canceled -= instance.OnWeapon7;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -414,5 +617,12 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnScope(InputAction.CallbackContext context);
+        void OnWeapon1(InputAction.CallbackContext context);
+        void OnWeapon2(InputAction.CallbackContext context);
+        void OnWeapon3(InputAction.CallbackContext context);
+        void OnWeapon4(InputAction.CallbackContext context);
+        void OnWeapon5(InputAction.CallbackContext context);
+        void OnWeapon6(InputAction.CallbackContext context);
+        void OnWeapon7(InputAction.CallbackContext context);
     }
 }

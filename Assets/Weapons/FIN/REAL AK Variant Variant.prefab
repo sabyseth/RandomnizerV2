@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1741922350419029249, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
+      propertyPath: recoilSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2994264444708163277, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.09
@@ -58,7 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 946921105004920720}
     - target: {fileID: 7211110441330933722, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
       propertyPath: FireCoolDown
-      value: 0.1
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211110441330933722, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
+      propertyPath: recoilamount
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7211110441330933722, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
       propertyPath: OnGunShoot.m_PersistentCalls.m_Calls.Array.size

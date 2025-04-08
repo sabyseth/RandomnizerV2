@@ -3,64 +3,94 @@ using UnityEngine.InputSystem;
 
 public class WeaponManager : MonoBehaviour
 {
-    public GameObject[] weapons; // Array to hold your weapon prefabs
-    public Transform weaponParent; // The parent under which weapons will spawn (usually the Main Camera)
-    private GameObject currentWeapon; // To keep track of the currently equipped weapon
+    [System.Serializable]
+    public class Weapon
+    {
+        public GameObject weaponPrefab;
+        [HideInInspector] public GameObject weaponInstance;
+        public Transform weaponParent; // Should be a child transform of your player/camera
+        public Vector3 localPosition;
+        public Quaternion localRotation;
+        public Vector3 localScale = Vector3.one;
+        public bool isActive = false;
+    }
 
+    [SerializeField] private Weapon[] weapons = new Weapon[7];
+    [SerializeField] private int currentWeaponIndex = 0;
+    
     private PlayerInput playerInput;
-    private InputAction switchWeapon1Action;
-    private InputAction switchWeapon2Action;
 
-    void Awake()
+    private void Awake()
     {
-        // Initialize the player input and actions for switching weapons
         playerInput = GetComponent<PlayerInput>();
-        switchWeapon1Action = playerInput.actions["SwitchWeapon1"];
-        switchWeapon2Action = playerInput.actions["SwitchWeapon2"];
+        InitializeWeapons();
     }
 
-    void OnEnable()
+    private void InitializeWeapons()
     {
-        // Subscribe to input actions
-        switchWeapon1Action.performed += SwitchWeapon1;
-        switchWeapon2Action.performed += SwitchWeapon2;
-    }
-
-    void OnDisable()
-    {
-        // Unsubscribe to avoid memory leaks
-        switchWeapon1Action.performed -= SwitchWeapon1;
-        switchWeapon2Action.performed -= SwitchWeapon2;
-    }
-
-    void Start()
-    {
-        // Spawn the first weapon at the start
-        if (weapons.Length > 0)
+        for (int i = 0; i < weapons.Length; i++)
         {
-            SpawnWeapon(0); // Spawn the first weapon
+            if (weapons[i].weaponPrefab != null && weapons[i].weaponInstance == null)
+            {
+                // Instantiate as child of the weapon parent
+                weapons[i].weaponInstance = Instantiate(
+                    weapons[i].weaponPrefab, 
+                    weapons[i].weaponParent
+                );
+                
+                // Set local transform values
+                weapons[i].weaponInstance.transform.localPosition = weapons[i].localPosition;
+                weapons[i].weaponInstance.transform.localRotation = weapons[i].localRotation;
+                weapons[i].weaponInstance.transform.localScale = weapons[i].localScale;
+                
+                weapons[i].weaponInstance.SetActive(false);
+                
+                // Disable physics if not needed
+                var rb = weapons[i].weaponInstance.GetComponent<Rigidbody>();
+                if (rb != null) rb.isKinematic = true;
+            }
+        }
+        
+        // Enable the first weapon
+        if (weapons.Length > 0 && weapons[currentWeaponIndex].weaponInstance != null)
+        {
+            weapons[currentWeaponIndex].weaponInstance.SetActive(true);
+            weapons[currentWeaponIndex].isActive = true;
         }
     }
 
-    void SpawnWeapon(int weaponIndex)
+    private void Update()
     {
-        if (currentWeapon != null)
+        // Check for weapon switch inputs
+        if (playerInput.actions["Weapon1"].triggered) SwitchWeapon(0);
+        if (playerInput.actions["Weapon2"].triggered) SwitchWeapon(1);
+        if (playerInput.actions["Weapon3"].triggered) SwitchWeapon(2);
+        if (playerInput.actions["Weapon4"].triggered) SwitchWeapon(3);
+        if (playerInput.actions["Weapon5"].triggered) SwitchWeapon(4);
+        if (playerInput.actions["Weapon6"].triggered) SwitchWeapon(5);
+        if (playerInput.actions["Weapon7"].triggered) SwitchWeapon(6);
+    }
+
+    private void SwitchWeapon(int newWeaponIndex)
+    {
+        if (newWeaponIndex < 0 || newWeaponIndex >= weapons.Length || 
+            newWeaponIndex == currentWeaponIndex || 
+            weapons[newWeaponIndex].weaponInstance == null)
         {
-            Destroy(currentWeapon); // Destroy the currently equipped weapon
+            return;
         }
-
-        // Instantiate the new weapon prefab under the weapon parent (the main camera)
-        currentWeapon = Instantiate(weapons[weaponIndex], weaponParent.position, weaponParent.rotation);
-        currentWeapon.transform.SetParent(weaponParent); // Set the camera as the parent
-    }
-
-    void SwitchWeapon1(InputAction.CallbackContext context)
-    {
-        SpawnWeapon(0); // Spawn the first weapon when the key is pressed
-    }
-
-    void SwitchWeapon2(InputAction.CallbackContext context)
-    {
-        SpawnWeapon(1); // Spawn the second weapon when the key is pressed
+        
+        // Disable current weapon
+        weapons[currentWeaponIndex].weaponInstance.SetActive(false);
+        weapons[currentWeaponIndex].isActive = false;
+        
+        // Enable new weapon
+        currentWeaponIndex = newWeaponIndex;
+        weapons[currentWeaponIndex].weaponInstance.SetActive(true);
+        weapons[currentWeaponIndex].isActive = true;
+        
+        // Reset transform in case it was moved
+        weapons[currentWeaponIndex].weaponInstance.transform.localPosition = weapons[currentWeaponIndex].localPosition;
+        weapons[currentWeaponIndex].weaponInstance.transform.localRotation = weapons[currentWeaponIndex].localRotation;
     }
 }

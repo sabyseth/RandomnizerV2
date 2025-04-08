@@ -253,9 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81d9b9c795be4508bcff44c8c012bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGunShoot:
-    m_PersistentCalls:
-      m_Calls: []
   FireCoolDown: 0
   Automatic: 0
   CurrentCoolDown: 0
@@ -583,6 +580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 892262952}
+  - component: {fileID: 892262954}
   - component: {fileID: 892262953}
   m_Layer: 0
   m_Name: Player
@@ -625,6 +623,27 @@ MonoBehaviour:
   playerCamera: {fileID: 500468541}
   cameraSpring: {fileID: 1268019413}
   cameraLean: {fileID: 1030538282}
+--- !u!114 &892262954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892262951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1334738668
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &952159559
 GameObject:
   m_ObjectHideFlags: 0
