@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_project/Runtime/UI/NetworkManagerUIStyle.uss?fileID=7433441132597879392&amp;guid=2a9b7380d891a4328bde93c8f2b61595&amp;type=3#NetworkManagerUIStyle" />
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; position: absolute; left: 0; top: 0; height: 49px; width: 89px;">
-        <ui:Label tabindex="-1" text="Role" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NetworkRole" style="font-size: 30px; background-color: rgb(154, 186, 255); height: 79px; width: 173px; -unity-text-align: middle-center; white-space: nowrap; text-overflow: clip;" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; position: absolute; left: 0; top: 0; height: 20%; width: 50%;">
+        <ui:Label text="Role" name="NetworkRole" style="background-color: rgb(154, 186, 255); -unity-text-align: middle-center; white-space: nowrap; text-overflow: clip; font-size: 100%;" />
     </ui:VisualElement>
     <ui:VisualElement name="Buttons" style="align-self: flex-end; height: 100%; width: 30%;">
         <ui:Button text="Server" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Server" class="button" />
