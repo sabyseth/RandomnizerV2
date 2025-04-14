@@ -24,14 +24,14 @@ public class GunDamage : MonoBehaviour
     public float CurrentCoolDown;
     public bool burst;
 
-    // New variables for burst fire
-    public int BurstCount = 3; // Number of rounds in the burst
-    public float BurstInterval = 0.1f; // Time between each burst shot
+    
+    public int BurstCount = 3; 
+    public float BurstInterval = 0.1f; 
     private bool isBursting = false;
 
     private void Awake()
     {
-        // Get the Fire action from the input asset
+        
         fireAction = playerInput.actions["Fire"];
         PlayerCamera = Camera.main.transform;
     }
@@ -45,7 +45,7 @@ public class GunDamage : MonoBehaviour
                 if (burst == true){
                 if (!isBursting) 
                 {
-                    StartCoroutine(BurstFire()); // Start burst fire when not already bursting
+                    StartCoroutine(BurstFire());
                 }
                 }
                 else {
@@ -56,7 +56,7 @@ public class GunDamage : MonoBehaviour
             }
         }
 
-        // Decrease cooldown each frame
+        
         CurrentCoolDown -= Time.deltaTime;
     }
 
@@ -66,11 +66,11 @@ public class GunDamage : MonoBehaviour
 
         for (int i = 0; i < BurstCount; i++)
         {
-            Shoot();  // Shoot a single shot
-            yield return new WaitForSeconds(BurstInterval);  // Wait before firing the next shot
+            Shoot();  
+            yield return new WaitForSeconds(BurstInterval); 
         }
 
-        // Reset cooldown after burst fire
+       
         CurrentCoolDown = FireCoolDown;
         isBursting = false;
     }
@@ -82,27 +82,26 @@ public class GunDamage : MonoBehaviour
         Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);
         Debug.Log("Shot");
 
-        // Check if the ray hits anything
+        
         if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
         {
-            // Spawn the bullet trail
+            
             TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            StartCoroutine(SpawnTrail(trail, hitInfo.point)); // Use the hit point
-            // Check if the hit object has an Entity component
+            StartCoroutine(SpawnTrail(trail, hitInfo.point)); 
             if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
             {
                 enemy.Health -= Damage;
-                // Debug.Log("Hit entity");
+                
             }
         }
         else
         {
-            // If no object is hit, calculate the endpoint based on the bullet range
+            
             Vector3 missPoint = gunRay.origin + gunRay.direction * BulletRange;
 
-            // Spawn the bullet trail
+           
             TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            StartCoroutine(SpawnTrail(trail, missPoint)); // Use the calculated miss point
+            StartCoroutine(SpawnTrail(trail, missPoint)); 
         }
     }
 
