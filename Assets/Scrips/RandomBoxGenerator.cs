@@ -141,13 +141,8 @@ public abstract class RoomConfiguration : MonoBehaviour
             doorTop.GetComponent<Renderer>().material.color = Color.white;
         }
     }
-
-}
-public class OneRoom : RoomConfiguration
-{
-    public override void GenerateConfiguration()
+    protected void createBaseRoom( )
     {
-        Debug.Log("OneRoom configuration");
         CreateWall("Floor", new Vector3(width + wallThickness, wallThickness, length + wallThickness), 
                    new Vector3(0, -wallThickness / 2, 0), parent);
 
@@ -161,7 +156,17 @@ public class OneRoom : RoomConfiguration
                    new Vector3(0, height / 2, length / 2), parent);
 
         //CreateWallWithDoor("Wall_Front", new Vector3(width, height, wallThickness), 
-          //                 new Vector3(0, height / 2, -length / 2), parent);
+                          //new Vector3(0, height / 2, -length / 2), parent);
+
+    }
+}
+
+public class OneRoom : RoomConfiguration
+{
+    public override void GenerateConfiguration()
+    {
+        Debug.Log("OneRoom configuration");
+        createBaseRoom();
     }
 
 }
@@ -183,42 +188,73 @@ public class TwoExternalRooms : RoomConfiguration
     {
         Debug.Log("TwoExternalRooms configuration");
 
-        // Randomize the second room size (between 50% and 80% of the first room)
+        // Randomize the room sizes
         float primaryRoomWidth = width * Random.Range(0.5f, 0.8f);
         float secondaryRoomWidth = width - primaryRoomWidth;
         float roomHeight = height;
-        float roomLength = length;
+        
+        // Make sure the lengths are different by at least 20%
+        float primaryRoomLength = length;
+        float secondaryRoomLength;
+        do {
+            secondaryRoomLength = length * Random.Range(0.5f, 0.9f);
+        } while (Mathf.Abs(primaryRoomLength - secondaryRoomLength) < length * 0.2f);
 
-        // Create first (larger) room
+        // Create first room
         Transform room1 = new GameObject("Room1").transform;
         room1.SetParent(parent);
-        CreateRoom(room1, new Vector3(-width / 2 + primaryRoomWidth / 2, 0, 0), primaryRoomWidth, roomHeight, roomLength, true);
+        CreateRoom(room1, new Vector3(-width / 2 + primaryRoomWidth / 2, 0, 0), 
+                  primaryRoomWidth, roomHeight, primaryRoomLength, false);
 
-        // Create second (smaller) room
+        // Create second room
         Transform room2 = new GameObject("Room2").transform;
         room2.SetParent(parent);
-        CreateRoom(room2, new Vector3(width / 2 - secondaryRoomWidth / 2, 0, 0), secondaryRoomWidth, roomHeight, roomLength, true);
+        CreateRoom(room2, new Vector3(width / 2 - secondaryRoomWidth / 2, 0, 0), 
+                  secondaryRoomWidth, roomHeight, secondaryRoomLength, true);
+
+        // Calculate the position for the shared wall based on which room is longer
+        float sharedWallZ = 0;
+        if (primaryRoomLength > secondaryRoomLength)
+        {
+            sharedWallZ = -length / 2 + secondaryRoomLength;
+        }
+        else
+        {
+            sharedWallZ = -length / 2 + primaryRoomLength;
+        }
 
         // Create the thicker shared internal wall with a door
-        CreateWallWithDoor("SharedWall", new Vector3(internalWallThickness, roomHeight, roomLength),
-            new Vector3(-width / 2 + primaryRoomWidth + (internalWallThickness / 2), roomHeight / 2, 0), parent, Vector3.right);
+        CreateWallWithDoor("SharedWall", new Vector3(internalWallThickness, roomHeight, Mathf.Min(primaryRoomLength, secondaryRoomLength)),
+            new Vector3(-width / 2 + primaryRoomWidth + (internalWallThickness / 2), roomHeight / 2, sharedWallZ - Mathf.Min(primaryRoomLength, secondaryRoomLength)/2), 
+            parent, Vector3.right);
     }
 
     void CreateRoom(Transform roomParent, Vector3 position, float roomWidth, float roomHeight, float roomLength, bool hasExternalDoor)
     {
         CreateWall("Floor", new Vector3(roomWidth, wallThickness, roomLength), 
                    position + new Vector3(0, -wallThickness / 2, 0), roomParent);
+        
         CreateWall("Wall_Left", new Vector3(wallThickness, roomHeight, roomLength), 
                    position + new Vector3(-roomWidth / 2, roomHeight / 2, 0), roomParent);
-        CreateWall("Wall_Right", new Vector3(wallThickness, roomHeight, roomLength), 
+        
+        if (hasExternalDoor)
+        {
+            CreateWall("Wall_Right", new Vector3(wallThickness, roomHeight, roomLength), 
                    position + new Vector3(roomWidth / 2, roomHeight / 2, 0), roomParent);
+        }
+    
         CreateWall("Wall_Back", new Vector3(roomWidth, roomHeight, wallThickness), 
                    position + new Vector3(0, roomHeight / 2, roomLength / 2), roomParent);
 
         if (hasExternalDoor)
         {
+            CreateWall("Wall_Front", new Vector3(roomWidth, roomHeight, wallThickness), 
+                   position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent);
+        }
+        else
+        {
             CreateWallWithDoor("Wall_Front", new Vector3(roomWidth, roomHeight, wallThickness),
-                position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent, Vector3.forward);
+                    position + new Vector3(0, roomHeight / 2, -roomLength / 2), roomParent, Vector3.forward);
         }
     }
 }
@@ -246,11 +282,9 @@ public class OneExternalOneInternal : RoomConfiguration
 {
     public override void GenerateConfiguration()
     {
-        // Logic for OneExternalOneInternal goes here.
+
         Debug.Log("OneExternalOneInternal configuration");
     }
 }
 
 
-// Repeat the same structure for OneExternalRoom, TwoExternalRooms, OneInternal, TwoInternal, and OneExternalOneInternal
-// Each class overrides GenerateConfiguration() with its unique structure logic.
