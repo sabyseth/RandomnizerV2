@@ -49,6 +49,10 @@ PrefabInstance:
       value: -0.279
       objectReference: {fileID: 0}
     - target: {fileID: 3725493878762833567, guid: 49718479105b34e70bef38f4678ba4d8, type: 3}
+      propertyPath: Damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725493878762833567, guid: 49718479105b34e70bef38f4678ba4d8, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 6539215181841733528}

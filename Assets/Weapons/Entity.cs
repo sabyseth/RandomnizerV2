@@ -26,11 +26,11 @@ public class Entity : MonoBehaviour
             if (health <= 0f)
             {
                 Destroy(gameObject);
-                GameObject newTarget = Instantiate(targetPrefab);
-                float randomX = Random.Range(collider.bounds.min.x, collider.bounds.max.x);
-                float randomY = Random.Range(collider.bounds.min.y, collider.bounds.max.y);
-                float randomZ = Random.Range(collider.bounds.min.z, collider.bounds.max.z);
-                newTarget.transform.position = new Vector3(randomX, randomY, randomZ);
+               // GameObject newTarget = Instantiate(targetPrefab);
+               // float randomX = Random.Range(collider.bounds.min.x, collider.bounds.max.x);
+                //float randomY = Random.Range(collider.bounds.min.y, collider.bounds.max.y);
+                //float randomZ = Random.Range(collider.bounds.min.z, collider.bounds.max.z);
+                //newTarget.transform.position = new Vector3(randomX, randomY, randomZ);
                 //newTarget.
                 health = StartingHealth;
                 Debug.Log(health);

@@ -152,6 +152,15 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""82aa82d4-2ec6-405f-a248-e25c9ddfca49"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -374,6 +383,17 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""action"": ""Weapon7"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74a81fc9-5120-4104-a20c-c6b0ca93d0c7"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -396,6 +416,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         m_Gameplay_Weapon5 = m_Gameplay.FindAction("Weapon5", throwIfNotFound: true);
         m_Gameplay_Weapon6 = m_Gameplay.FindAction("Weapon6", throwIfNotFound: true);
         m_Gameplay_Weapon7 = m_Gameplay.FindAction("Weapon7", throwIfNotFound: true);
+        m_Gameplay_Grapple = m_Gameplay.FindAction("Grapple", throwIfNotFound: true);
     }
 
     ~@PlayerInputActoions()
@@ -476,6 +497,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Weapon5;
     private readonly InputAction m_Gameplay_Weapon6;
     private readonly InputAction m_Gameplay_Weapon7;
+    private readonly InputAction m_Gameplay_Grapple;
     public struct GameplayActions
     {
         private @PlayerInputActoions m_Wrapper;
@@ -494,6 +516,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         public InputAction @Weapon5 => m_Wrapper.m_Gameplay_Weapon5;
         public InputAction @Weapon6 => m_Wrapper.m_Gameplay_Weapon6;
         public InputAction @Weapon7 => m_Wrapper.m_Gameplay_Weapon7;
+        public InputAction @Grapple => m_Wrapper.m_Gameplay_Grapple;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -545,6 +568,9 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon7.started += instance.OnWeapon7;
             @Weapon7.performed += instance.OnWeapon7;
             @Weapon7.canceled += instance.OnWeapon7;
+            @Grapple.started += instance.OnGrapple;
+            @Grapple.performed += instance.OnGrapple;
+            @Grapple.canceled += instance.OnGrapple;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -591,6 +617,9 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon7.started -= instance.OnWeapon7;
             @Weapon7.performed -= instance.OnWeapon7;
             @Weapon7.canceled -= instance.OnWeapon7;
+            @Grapple.started -= instance.OnGrapple;
+            @Grapple.performed -= instance.OnGrapple;
+            @Grapple.canceled -= instance.OnGrapple;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -624,5 +653,6 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         void OnWeapon5(InputAction.CallbackContext context);
         void OnWeapon6(InputAction.CallbackContext context);
         void OnWeapon7(InputAction.CallbackContext context);
+        void OnGrapple(InputAction.CallbackContext context);
     }
 }
