@@ -8,7 +8,7 @@ public class WeaponManager : MonoBehaviour
     {
         public GameObject weaponPrefab;
         [HideInInspector] public GameObject weaponInstance;
-        public Transform weaponParent; // Should be a child transform of your player/camera
+        public Transform weaponParent; 
         public Vector3 localPosition;
         public Quaternion localRotation;
         public Vector3 localScale = Vector3.one;
@@ -32,26 +32,26 @@ public class WeaponManager : MonoBehaviour
         {
             if (weapons[i].weaponPrefab != null && weapons[i].weaponInstance == null)
             {
-                // Instantiate as child of the weapon parent
+              
                 weapons[i].weaponInstance = Instantiate(
                     weapons[i].weaponPrefab, 
                     weapons[i].weaponParent
                 );
                 
-                // Set local transform values
+                
                 weapons[i].weaponInstance.transform.localPosition = weapons[i].localPosition;
                 weapons[i].weaponInstance.transform.localRotation = weapons[i].localRotation;
                 weapons[i].weaponInstance.transform.localScale = weapons[i].localScale;
                 
                 weapons[i].weaponInstance.SetActive(false);
                 
-                // Disable physics if not needed
+                
                 var rb = weapons[i].weaponInstance.GetComponent<Rigidbody>();
                 if (rb != null) rb.isKinematic = true;
             }
         }
         
-        // Enable the first weapon
+       
         if (weapons.Length > 0 && weapons[currentWeaponIndex].weaponInstance != null)
         {
             weapons[currentWeaponIndex].weaponInstance.SetActive(true);
@@ -61,7 +61,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        // Check for weapon switch inputs
+   
         if (playerInput.actions["Weapon1"].triggered) SwitchWeapon(0);
         if (playerInput.actions["Weapon2"].triggered) SwitchWeapon(1);
         if (playerInput.actions["Weapon3"].triggered) SwitchWeapon(2);
@@ -80,16 +80,16 @@ public class WeaponManager : MonoBehaviour
             return;
         }
         
-        // Disable current weapon
+   
         weapons[currentWeaponIndex].weaponInstance.SetActive(false);
         weapons[currentWeaponIndex].isActive = false;
         
-        // Enable new weapon
+      
         currentWeaponIndex = newWeaponIndex;
         weapons[currentWeaponIndex].weaponInstance.SetActive(true);
         weapons[currentWeaponIndex].isActive = true;
         
-        // Reset transform in case it was moved
+        
         weapons[currentWeaponIndex].weaponInstance.transform.localPosition = weapons[currentWeaponIndex].localPosition;
         weapons[currentWeaponIndex].weaponInstance.transform.localRotation = weapons[currentWeaponIndex].localRotation;
     }
