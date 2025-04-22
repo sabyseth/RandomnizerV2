@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,29 +16,39 @@ public class networkManagerUI : NetworkBehaviour
     public TextField networkRole;
     public String role;
     private List<Button> _serverUIButtons = new List<Button>();
+    
+    public Label roleText;
 
     private void Awake()
     {
         
-        _document = GetComponent<UIDocument>();
+        var root = GetComponent<UIDocument>().rootVisualElement;
         
-        _server = _document.rootVisualElement.Q("Server") as Button;
+        roleText = root.Q<Label>("NetworkRole");
+        roleText = root.Q("NetworkRole") as Label;
+
+        _server = root.Q("Server") as Button;
         _server.RegisterCallback<ClickEvent>(onServerClick);
-        _host = _document.rootVisualElement.Q("Host") as Button;
+        _host = root.Q("Host") as Button;
         _host.RegisterCallback<ClickEvent>(onServerClick);
-        _client = _document.rootVisualElement.Q("Client") as Button;
+        _client = root.Q("Client") as Button;
         _client.RegisterCallback<ClickEvent>(onServerClick);
 
-        // _serverUIButtons = _document.rootVisualElement.Query<Button>().ToList();
+        // _serverUIButtons = root.Query<Button>().ToList();
         // for (int i = 0; i < _serverUIButtons.Count; i++)
         // {
         //     _serverUIButtons[i].RegisterCallback<ClickEvent>(OnAllButtonsClick);
         //     if(i == 0) { }
         // }
-
+        InvokeRepeating("SendDebugMessage", 0f, 5f);
         
     }
-   
+        
+    public void SendDebugMessage()
+    {
+        Debug.Log(role);
+    }
+    
     private void OnDisable()
     {
         _server.UnregisterCallback<ClickEvent>(onServerClick);
@@ -65,22 +76,6 @@ public class networkManagerUI : NetworkBehaviour
         {
             NetworkManager.Singleton.StartHost();
         };
-        if(IsHost)
-        {
-            role = "Host";
-            Debug.Log(role);
-        }
-        else if(IsClient)
-        {
-            role = "Client";
-            Debug.Log(role);
-
-        }
-        else
-        {
-            role = "server";
-            Debug.Log(role);
-        }
     }
 
     private void OnAllButtonsClick(ClickEvent evt)
