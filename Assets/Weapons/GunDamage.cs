@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GunDamage : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GunDamage : MonoBehaviour
     public bool Automatic;
     public float CurrentCoolDown;
     public bool burst;
+    public int ammo; 
+    public Text ammoDisplay;
 
     public int BurstCount = 3; 
     public float BurstInterval = 0.1f; 
@@ -37,9 +40,10 @@ public class GunDamage : MonoBehaviour
 
     private void Update()
     {
+        ammoDisplay.text = ammo.ToString();
         if (fireAction.IsPressed()) 
         {
-            if (CurrentCoolDown <= 0f)
+            if (CurrentCoolDown <= 0f && ammo > 0) 
             {
                 if (burst == true){
                 if (!isBursting) 
@@ -48,6 +52,8 @@ public class GunDamage : MonoBehaviour
                 }
                 }
                 else {
+
+                    ammo--;
                     Shoot();
                CurrentCoolDown = FireCoolDown;
 
