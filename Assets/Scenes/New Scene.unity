@@ -214,6 +214,9 @@ MonoBehaviour:
   crouchHeightResponse: 15
   standCameraTargetHeight: 0.9
   crouchCameraTargetHeight: 0.7
+  grappleAcceleration: 15
+  maxGrappleSpeed: 50
+  grappleSpeed: 25
 --- !u!4 &268132952
 Transform:
   m_ObjectHideFlags: 0
@@ -1181,7 +1184,6 @@ GameObject:
   - component: {fileID: 791601408}
   - component: {fileID: 791601410}
   - component: {fileID: 791601411}
-  - component: {fileID: 791601412}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1349,12 +1351,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fea12bb261840a3bac204ca49ebddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  motor: {fileID: 268132953}
   whatIsGrappleable:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4294967295
   gunTip: {fileID: 1242566722}
   camera: {fileID: 322624904}
   player: {fileID: 268132952}
+  baseGrappleSpeed: 100
+  maxGrappleSpeed: 400
+  grappleAcceleration: 30
 --- !u!120 &791601411
 LineRenderer:
   serializedVersion: 2
@@ -1402,7 +1408,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.8
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1459,33 +1465,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!54 &791601412
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791601404}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &866512298
 GameObject:
   m_ObjectHideFlags: 0

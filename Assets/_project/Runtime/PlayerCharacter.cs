@@ -90,11 +90,21 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
+    public float grappleAcceleration = 15f;
+    public float maxGrappleSpeed = 50f; 
+    public float grappleSpeed = 25f;
+    private bool _isGrappling;
+    private Vector3 _grapplePoint;
+    
+    private Vector3 _grappleVelocity;
+    private Vector3 _grappleDirection;
+    private float _currentGrappleSpeed;
     private bool _requestedJump;
     private bool _requestedStustainedJump;
 
     private bool _requestedCrouch;
     private bool _requestedCrouchInAir;
+   
 
     private float _timeSinceUngrounded;
     private float _timeSinceJumpRequest;
@@ -195,13 +205,47 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
         );
 
     }
+public void StartGrapple(Vector3 point)
+{
+   _isGrappling = true;
+   _grapplePoint = point;
+    _grappleDirection = (point - motor.TransientPosition).normalized;
+    _currentGrappleSpeed = grappleSpeed; // Start with base speed
+    motor.ForceUnground();
+}
+
+public void StopGrapple()
+{
+    _isGrappling = false;
+}
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
         characterInfo.SetStateText(_state.Stance.ToString());   
         characterInfo.SetFloatValue(currentVelocity.magnitude);
         _state.Acceleration = Vector3.zero;
-
+ if (_isGrappling)
+{
+    // Accelerate over time (capped at max speed)
+    _currentGrappleSpeed = Mathf.Min(
+        _currentGrappleSpeed + grappleAcceleration * deltaTime,
+        maxGrappleSpeed
+    );
+    
+    currentVelocity = _grappleDirection * _currentGrappleSpeed;
+    
+    // Calculate distance to ACTUAL grapple point
+    float distance = Vector3.Distance(motor.TransientPosition, _grapplePoint);
+    if (distance < 5f) {
+        currentVelocity *= distance / 5f; 
+        
+        // Auto-stop when very close
+        if (distance < 0.5f) {
+            StopGrapple();
+        }
+    }
+    return;
+}
         // If on the ground...
         if (motor.GroundingStatus.IsStableOnGround)
         {
