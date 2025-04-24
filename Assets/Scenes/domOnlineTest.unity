@@ -531,6 +531,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   role: 
+  playerColor: {fileID: 2100000, guid: 9c35beb5193c3454a9f30cd3f74b65a6, type: 2}
+  roleColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1284069547
 MonoBehaviour:
   m_ObjectHideFlags: 0

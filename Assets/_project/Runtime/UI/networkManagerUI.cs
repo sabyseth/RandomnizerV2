@@ -7,8 +7,6 @@ using UnityEngine.UIElements;
 
 public class networkManagerUI : NetworkBehaviour
 {
-    //[SerializeField] private String Role;
-
     private UIDocument _document;
     private Button _server;
     private Button _client;
@@ -18,11 +16,15 @@ public class networkManagerUI : NetworkBehaviour
     private List<Button> _serverUIButtons = new List<Button>();
     
     public Label roleText;
+    public Material playerColor;
+    public Color roleColor;
+
 
     private void Awake()
     {
         
         var root = GetComponent<UIDocument>().rootVisualElement;
+
         
         roleText = root.Q<Label>("NetworkRole");
         roleText = root.Q("NetworkRole") as Label;
@@ -40,13 +42,13 @@ public class networkManagerUI : NetworkBehaviour
         //     _serverUIButtons[i].RegisterCallback<ClickEvent>(OnAllButtonsClick);
         //     if(i == 0) { }
         // }
-        InvokeRepeating("SendDebugMessage", 0f, 5f);
+        InvokeRepeating("roleTextUpdate", 0f, 5f);
         
     }
         
-    public void SendDebugMessage()
+    public void roleTextUpdate()
     {
-        Debug.Log(role);
+        roleText.text = role;
     }
     
     private void OnDisable()
@@ -63,18 +65,22 @@ public class networkManagerUI : NetworkBehaviour
     {
         if (evt.currentTarget.Equals(_server))
         {
-            Debug.Log("Server Clicked");
             NetworkManager.Singleton.StartServer();
+            role = "client";
         };
 
         if (evt.currentTarget.Equals(_client))
         {
             NetworkManager.Singleton.StartClient();
+            role = "Client";
         };
 
         if (evt.currentTarget.Equals(_host))
         {
             NetworkManager.Singleton.StartHost();
+            role = "Host";
+            roleColor = Color.red;
+            //changeColor();
         };
     }
 
@@ -82,6 +88,20 @@ public class networkManagerUI : NetworkBehaviour
     {
         
     }
+    // public void changeColor()
+    // {
+    //     // Get the Renderer component
+    //     // Check if the Renderer exists
+    //     if (renderer != null)
+    //     {
+    //         // Change the color of the material
+    //         renderer.material.color = roleColor;
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("No Renderer component found on this GameObject.");
+    //     }
+    // }
     // void Update()
     // {
 
