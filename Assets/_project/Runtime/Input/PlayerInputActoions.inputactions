@@ -45,7 +45,7 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "61ff78a1-08ba-4196-8d78-9cf7fca59548",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -54,6 +54,15 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "c396cd01-9065-4b87-8f40-2d108f25b458",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "ab086659-6b08-4dd4-bd1b-eb7763af7ea4",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -350,6 +359,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Weapon7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81228657-ec12-46e4-b709-819ce4f31383",
+                    "path": "<Keyboard>/#(R)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

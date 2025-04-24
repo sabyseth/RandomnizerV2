@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class GunDamage : MonoBehaviour
 {
     public PlayerInput playerInput;
     private InputAction fireAction;
+    private InputAction Reload;
     public float Damage;
     public Recoil RecoilObject;
     public float BulletRange;
@@ -26,7 +28,8 @@ public class GunDamage : MonoBehaviour
     public bool burst;
     public int ammo; 
     public Text ammoDisplay;
-
+    private int clip;
+    
     public int BurstCount = 3; 
     public float BurstInterval = 0.1f; 
     private bool isBursting = false;
@@ -35,12 +38,17 @@ public class GunDamage : MonoBehaviour
     {
    
         fireAction = playerInput.actions["Fire"];
+        Reload = playerInput.actions["Reload"];
         PlayerCamera = Camera.main.transform;
+        clip = ammo;  
     }
 
     private void Update()
     {
-        ammoDisplay.text = ammo.ToString();
+        if (ammoDisplay != null)
+        {
+            ammoDisplay.text = ammo.ToString();
+        }
         if (fireAction.IsPressed()) 
         {
             if (CurrentCoolDown <= 0f && ammo > 0) 
@@ -59,6 +67,10 @@ public class GunDamage : MonoBehaviour
 
                 }
             }
+        }
+        if (Reload.IsInProgress())
+        {
+            ammo =+ clip; 
         }
 
     
