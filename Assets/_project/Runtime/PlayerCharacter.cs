@@ -46,6 +46,7 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     public float FireCoolDown;
     public bool Automatic;
     public float CurrentCoolDown;
+    [SerializeField] private Animator animator;
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
@@ -201,6 +202,15 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     {
         characterInfo.SetStateText(_state.Stance.ToString());   
         characterInfo.SetFloatValue(currentVelocity.magnitude);
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", currentVelocity.magnitude);
+
+            animator.SetBool("IsGrounded", _state.Grounded);
+            animator.SetBool("IsCrouching", _state.Stance == Stance.Crouch);
+            animator.SetBool("IsSliding", _state.Stance == Stance.Slide);
+            animator.SetBool("IsSprinting", _state.Stance == Stance.Sprint);
+        }
         _state.Acceleration = Vector3.zero;
 
         // If on the ground...
@@ -419,6 +429,11 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
         {
             var grounded = motor.GroundingStatus.IsStableOnGround;
             var canCoyoteJump = _timeSinceUngrounded < coyoteTime && !_ungroundedDueToJump;
+            
+            if (animator != null)
+            {
+                animator.SetTrigger("Jump");
+            }
 
             if (grounded || canCoyoteJump)
             {
