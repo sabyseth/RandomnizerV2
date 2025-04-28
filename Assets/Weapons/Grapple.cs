@@ -1,105 +1,93 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using KinematicCharacterController;
+using UnityEngine.Events;
 
-public class GrapplingGun : MonoBehaviour {
-
-
-[SerializeField] private KinematicCharacterMotor motor;   private LineRenderer lr;
-   private Vector3 grapplePoint;
-   public LayerMask whatIsGrappleable;
-   public Transform gunTip, camera, player;
-   private float maxDistance = 100f;
-   private bool wasGrapplePressed = false;
-   public float baseGrappleSpeed = 25f; 
-   public float maxGrappleSpeed = 50f;
-   public float grappleAcceleration = 15f;
-
-   private PlayerInput playerInput;
-
-
-   void Awake() {
-       lr = GetComponent<LineRenderer>();
-       playerInput = GetComponent<PlayerInput>();
-   }
-
-
-  void Update()
+public class GrapplingGun : MonoBehaviour
 {
-   bool isGrapplePressed = playerInput.actions["Grapple"].IsPressed();
-  Debug.Log($"Grapple input: {playerInput.actions["Grapple"].ReadValue<float>()}");
-   if (isGrapplePressed && !wasGrapplePressed)
-   {
-      
-       StartGrapple();
-   }
-   else if (!isGrapplePressed && wasGrapplePressed)
-   {
-      
-       StopGrapple();
-   }
-  
-   wasGrapplePressed = isGrapplePressed;
-}
+    [SerializeField] private KinematicCharacterMotor motor;
+    [SerializeField] private LineRenderer lr;
+    [SerializeField] private Transform gunTip;
+    [SerializeField] private Transform camera;
+    [SerializeField] private Transform player;
+    [SerializeField] private LayerMask whatIsGrappleable;
+    [SerializeField] private float maxDistance = 100f;
+    [SerializeField] private float baseGrappleSpeed = 25f; 
+    [SerializeField] private float maxGrappleSpeed = 50f;
+    [SerializeField] private float grappleAcceleration = 15f;
+    public UnityEvent OnGrappleStopped;
+    private Vector3 grapplePoint;
+    private Vector3 currentGrapplePosition;
+    private PlayerInput playerInput;
+    private bool wasGrapplePressed = false;
+    private float distance;
 
-
-   //Called after Update
-   void LateUpdate() {
-       DrawRope();
-   }
-
-
-void StartGrapple()
-{
-    if (Physics.Raycast(camera.position, camera.forward, out RaycastHit hit, maxDistance, whatIsGrappleable))
+    private void Awake() 
     {
-        grapplePoint = hit.point; // Store for rope drawing
+        if (lr == null) lr = GetComponent<LineRenderer>();
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void Update()
+    {
+        bool isGrapplePressed = playerInput.actions["Grapple"].IsPressed();
         
+        if (isGrapplePressed && !wasGrapplePressed)
+        {
+            StartGrapple();
+        }
+        else if (!isGrapplePressed && wasGrapplePressed)
+        {
+            StopGrapple();
+        }
+        
+        wasGrapplePressed = isGrapplePressed;
+        if (lr.positionCount > 0 && Vector3.Distance(motor.TransientPosition, grapplePoint) < 3f)
+        {
+            StopGrapple();
+        }
+    }
+
+    private void LateUpdate() 
+    {
+        DrawRope();
+    }
+
+    private void StartGrapple()
+    {
+        if (Physics.Raycast(camera.position, camera.forward, out RaycastHit hit, maxDistance, whatIsGrappleable))
+        {
+            grapplePoint = hit.point;
+            currentGrapplePosition = gunTip.position;
+            PlayerCharacter pc = player.GetComponent<PlayerCharacter>();
+            if (pc != null)
+            {
+                pc.grappleSpeed = baseGrappleSpeed;
+                pc.maxGrappleSpeed = maxGrappleSpeed; 
+                pc.grappleAcceleration = grappleAcceleration;
+                pc.StartGrapple(hit.point);
+            }
+            lr.positionCount = 2;
+        }
+    }
+
+    public void StopGrapple()
+    {
         PlayerCharacter pc = player.GetComponent<PlayerCharacter>();
         if (pc != null)
         {
-            pc.grappleSpeed = baseGrappleSpeed;
-            pc.maxGrappleSpeed = maxGrappleSpeed; 
-            pc.grappleAcceleration = grappleAcceleration;
-            
-            pc.StartGrapple(hit.point);
+            pc.StopGrapple();
         }
-        
-        lr.positionCount = 2;
-        currentGrapplePosition = gunTip.position;
-        grapplePoint = hit.point; 
+        lr.positionCount = 0;
+        OnGrappleStopped?.Invoke();
     }
-}
 
-void StopGrapple()
-{
-    PlayerCharacter pc = player.GetComponent<PlayerCharacter>();
-    if (pc != null)
+    private void DrawRope() 
     {
-        pc.StopGrapple();
+        if (lr == null || gunTip == null || lr.positionCount != 2) return;
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
+        lr.SetPosition(0, gunTip.position);
+        lr.SetPosition(1, currentGrapplePosition);
     }
-    lr.positionCount = 0;
+    public Vector3 GetGrapplePoint() => grapplePoint;
 }
-
-
-   private Vector3 currentGrapplePosition;
-  
-   void DrawRope() {
-       //If not grappling, don't draw rop
-    if (lr == null || gunTip == null) return;
-    if (lr.positionCount != 2) return;
-    
-  
-       currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
-      
-       lr.SetPosition(0, gunTip.position);
-       lr.SetPosition(1, currentGrapplePosition);
-   }
-
-
-
-   public Vector3 GetGrapplePoint() {
-       return grapplePoint;
-   }
-}
-

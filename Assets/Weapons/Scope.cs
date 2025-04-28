@@ -52,7 +52,7 @@ public class Scope : MonoBehaviour
     void Unscoped()
     {
         IsScoped = false;
-        scopeOverlay.SetActive(false);  // Disable overlay when unscoped
+        scopeOverlay.SetActive(false);  
         weaponCamera.SetActive(true);
         mainCamera.fieldOfView = normalFOV;
         animator.SetBool("Scoped", false);

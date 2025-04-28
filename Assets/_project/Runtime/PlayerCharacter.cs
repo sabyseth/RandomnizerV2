@@ -45,7 +45,8 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     public float FireCoolDown;
     public bool Automatic;
     public float CurrentCoolDown;
-    [SerializeField] private KinematicCharacterMotor motor;
+    public UnityEvent OnGrappleStopped; 
+    [SerializeField] private KinematicCharacterMotor motor; //private LineRenderer lr;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
     [Space]
@@ -87,7 +88,6 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     private CharacterState _state;
     private CharacterState _lastState;
     private CharacterState _tempState;
-    
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
     public float grappleAcceleration = 15f;
@@ -217,6 +217,8 @@ public void StartGrapple(Vector3 point)
 public void StopGrapple()
 {
     _isGrappling = false;
+   // OnGrappleStopped?.Invoke();
+  // lr.positionCount = 0;
 }
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
@@ -226,7 +228,6 @@ public void StopGrapple()
         _state.Acceleration = Vector3.zero;
  if (_isGrappling)
 {
-    // Accelerate over time (capped at max speed)
     _currentGrappleSpeed = Mathf.Min(
         _currentGrappleSpeed + grappleAcceleration * deltaTime,
         maxGrappleSpeed
@@ -234,13 +235,13 @@ public void StopGrapple()
     
     currentVelocity = _grappleDirection * _currentGrappleSpeed;
     
-    // Calculate distance to ACTUAL grapple point
+    
     float distance = Vector3.Distance(motor.TransientPosition, _grapplePoint);
     if (distance < 5f) {
         currentVelocity *= distance / 5f; 
         
-        // Auto-stop when very close
-        if (distance < 0.5f) {
+      
+        if (distance < 3f) {
             StopGrapple();
         }
     }

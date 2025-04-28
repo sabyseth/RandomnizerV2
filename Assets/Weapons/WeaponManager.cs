@@ -15,7 +15,7 @@ public class WeaponManager : MonoBehaviour
         public bool isActive = false;
     }
 
-    [SerializeField] private Weapon[] weapons = new Weapon[7];
+    [SerializeField] private Weapon[] weapons = new Weapon[8];
     [SerializeField] private int currentWeaponIndex = 0;
     
     private PlayerInput playerInput;
@@ -35,17 +35,11 @@ public class WeaponManager : MonoBehaviour
                 
                 weapons[i].weaponInstance = Instantiate(
                     weapons[i].weaponPrefab, 
-                    weapons[i].weaponParent
-                );
-                
-            
+                    weapons[i].weaponParent);
                 weapons[i].weaponInstance.transform.localPosition = weapons[i].localPosition;
                 weapons[i].weaponInstance.transform.localRotation = weapons[i].localRotation;
                 weapons[i].weaponInstance.transform.localScale = weapons[i].localScale;
-                
                 weapons[i].weaponInstance.SetActive(false);
-                
-              
                 var rb = weapons[i].weaponInstance.GetComponent<Rigidbody>();
                 if (rb != null) rb.isKinematic = true;
             }
@@ -69,6 +63,7 @@ public class WeaponManager : MonoBehaviour
         if (playerInput.actions["Weapon5"].triggered) SwitchWeapon(4);
         if (playerInput.actions["Weapon6"].triggered) SwitchWeapon(5);
         if (playerInput.actions["Weapon7"].triggered) SwitchWeapon(6);
+        if (playerInput.actions["Weapon8"].triggered) SwitchWeapon(7);
     }
 
     private void SwitchWeapon(int newWeaponIndex)
@@ -79,17 +74,11 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-        
-       
         weapons[currentWeaponIndex].weaponInstance.SetActive(false);
         weapons[currentWeaponIndex].isActive = false;
-        
-       
         currentWeaponIndex = newWeaponIndex;
         weapons[currentWeaponIndex].weaponInstance.SetActive(true);
         weapons[currentWeaponIndex].isActive = true;
-        
-        
         weapons[currentWeaponIndex].weaponInstance.transform.localPosition = weapons[currentWeaponIndex].localPosition;
         weapons[currentWeaponIndex].weaponInstance.transform.localRotation = weapons[currentWeaponIndex].localRotation;
     }

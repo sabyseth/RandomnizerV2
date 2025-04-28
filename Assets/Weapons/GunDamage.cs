@@ -23,6 +23,7 @@ public class GunDamage : MonoBehaviour
     public bool Automatic;
     public float CurrentCoolDown;
     public bool burst;
+    public bool revolver = false;
 
     
     public int BurstCount = 3; 

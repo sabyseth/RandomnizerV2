@@ -188,6 +188,21 @@ MonoBehaviour:
   FireCoolDown: 0
   Automatic: 0
   CurrentCoolDown: 0
+  OnGrappleStopped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 791601410}
+        m_TargetAssemblyTypeName: GrapplingGun, Assembly-CSharp
+        m_MethodName: StopGrapple
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   motor: {fileID: 268132953}
   root: {fileID: 330241333}
   cameraTarget: {fileID: 1108077120}
@@ -431,6 +446,7 @@ Transform:
   - {fileID: 1973357170}
   - {fileID: 1403652422}
   - {fileID: 1242566722}
+  - {fileID: 1646872686}
   m_Father: {fileID: 697378265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &322624905
@@ -1338,6 +1354,13 @@ MonoBehaviour:
     localRotation: {x: 0, y: 0, z: 0, w: 0}
     localScale: {x: 1, y: 1, z: 1}
     isActive: 0
+  - weaponPrefab: {fileID: 8453140530017672685, guid: 604b52a23a2374ee987b583761e3b9fa, type: 3}
+    weaponInstance: {fileID: 0}
+    weaponParent: {fileID: 1646872686}
+    localPosition: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0, w: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    isActive: 0
   currentWeaponIndex: 0
 --- !u!114 &791601410
 MonoBehaviour:
@@ -1352,15 +1375,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 268132953}
-  whatIsGrappleable:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  lr: {fileID: 0}
   gunTip: {fileID: 1242566722}
   camera: {fileID: 322624904}
   player: {fileID: 268132952}
+  whatIsGrappleable:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxDistance: 100
   baseGrappleSpeed: 100
   maxGrappleSpeed: 400
   grappleAcceleration: 30
+  OnGrappleStopped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!120 &791601411
 LineRenderer:
   serializedVersion: 2
@@ -1408,7 +1436,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1426,7 +1454,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1451,7 +1479,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 10
@@ -2115,6 +2143,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1646872685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1646872686}
+  m_Layer: 0
+  m_Name: RevoPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1646872686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646872685}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.59, y: -7.353, z: 0.859}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 322624904}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771055169
 GameObject:
