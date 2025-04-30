@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class GunDamage : MonoBehaviour
 {
     public PlayerInput playerInput;
+    public Animator animator;
     private InputAction fireAction;
     public float Damage;
     public Recoil RecoilObject;
@@ -24,8 +25,6 @@ public class GunDamage : MonoBehaviour
     public float CurrentCoolDown;
     public bool burst;
     public bool revolver = false;
-
-    
     public int BurstCount = 3; 
     public float BurstInterval = 0.1f; 
     private bool isBursting = false;
@@ -35,6 +34,7 @@ public class GunDamage : MonoBehaviour
         
         fireAction = playerInput.actions["Fire"];
         PlayerCamera = Camera.main.transform;
+        animator = gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -48,6 +48,12 @@ public class GunDamage : MonoBehaviour
                 {
                     StartCoroutine(BurstFire());
                 }
+                }
+                if (revolver == true){
+                animator.SetTrigger("COCKED");
+                Shoot();
+                animator.ResetTrigger("COCKED");
+                CurrentCoolDown = FireCoolDown;
                 }
                 else {
                     Shoot();
@@ -82,8 +88,7 @@ public class GunDamage : MonoBehaviour
         RecoilObject.recoil += recoilamount;
         Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);
         Debug.Log("Shot");
-
-        
+        //animator.SetBool("cocked", false);
         if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
         {
             
@@ -92,15 +97,12 @@ public class GunDamage : MonoBehaviour
             if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
             {
                 enemy.Health -= Damage;
-                
             }
         }
         else
         {
             
             Vector3 missPoint = gunRay.origin + gunRay.direction * BulletRange;
-
-           
             TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             StartCoroutine(SpawnTrail(trail, missPoint)); 
         }

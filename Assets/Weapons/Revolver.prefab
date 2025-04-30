@@ -41,8 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2342313642674444353}
   - component: {fileID: 2415244462854500509}
-  - component: {fileID: 5753830050641249276}
-  - component: {fileID: 90393616620731580}
   m_Layer: 0
   m_Name: Revolver
   m_TagString: Untagged
@@ -84,42 +82,6 @@ MonoBehaviour:
   maxTrans_z: 0
   recoilSpeed: 5
   recoil: 0
---- !u!95 &5753830050641249276
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8453140530017672685}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4e567ed8497744c1fa2fd9273123a238, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!111 &90393616620731580
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8453140530017672685}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: b0503e687a48149048cb0bd4662733c1, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &989181779359169315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,6 +159,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5120721239749964195, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2361932323940529315}
+    - targetCorrespondingSourceObject: {fileID: 5120721239749964195, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7878481168410348584}
   m_SourcePrefab: {fileID: 100100000, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
 --- !u!4 &4747326088254165050 stripped
 Transform:
@@ -221,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2361932323940529315}
+  animator: {fileID: 7878481168410348584}
   Damage: 0
   RecoilObject: {fileID: 2415244462854500509}
   BulletRange: 1000
@@ -282,3 +248,24 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &7878481168410348584
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5380169056326634112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e567ed8497744c1fa2fd9273123a238, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

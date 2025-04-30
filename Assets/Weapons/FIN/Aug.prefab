@@ -17,6 +17,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 328621789431213768, guid: fb64712b76ae24741bc1c4e8c16b6df7, type: 3}
     - target: {fileID: 901373805910997802, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
+      propertyPath: bulletSpeed
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 901373805910997802, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 7845385299982501022}

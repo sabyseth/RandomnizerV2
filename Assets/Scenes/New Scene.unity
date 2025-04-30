@@ -1382,7 +1382,7 @@ MonoBehaviour:
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxDistance: 100
+  maxDistance: 1000
   baseGrappleSpeed: 100
   maxGrappleSpeed: 400
   grappleAcceleration: 30
