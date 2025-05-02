@@ -360,7 +360,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 246
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -454,7 +454,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 183
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -774,6 +774,8 @@ MonoBehaviour:
   Automatic: 0
   CurrentCoolDown: 0
   burst: 0
+  ammo: 0
+  ammoDisplay: {fileID: 0}
   BurstCount: 3
   BurstInterval: 0.1
 --- !u!114 &3447948722288608164
