@@ -90,6 +90,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2342313642674444353}
     m_Modifications:
+    - target: {fileID: 1021653259612222528, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0747
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021653259612222528, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0376
+      objectReference: {fileID: 0}
     - target: {fileID: 5120721239749964195, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
       propertyPath: m_Name
       value: Classic_Revolver_HDRP
@@ -161,7 +169,10 @@ PrefabInstance:
       addedObject: {fileID: 2361932323940529315}
     - targetCorrespondingSourceObject: {fileID: 5120721239749964195, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7878481168410348584}
+      addedObject: {fileID: 5943859814317189903}
+    - targetCorrespondingSourceObject: {fileID: 5120721239749964195, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8061192800276859652}
   m_SourcePrefab: {fileID: 100100000, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
 --- !u!4 &4747326088254165050 stripped
 Transform:
@@ -186,7 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2361932323940529315}
-  animator: {fileID: 7878481168410348584}
   Damage: 0
   RecoilObject: {fileID: 2415244462854500509}
   BulletRange: 1000
@@ -248,7 +258,22 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &7878481168410348584
+--- !u!111 &5943859814317189903
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5380169056326634112}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &8061192800276859652
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

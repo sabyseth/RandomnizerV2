@@ -727,6 +727,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 154156, guid: 7b39457d86700bb45bc04b846f3c69aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3447948722288608164}
+    - targetCorrespondingSourceObject: {fileID: 154156, guid: 7b39457d86700bb45bc04b846f3c69aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5538960480877416191}
   m_SourcePrefab: {fileID: 100100000, guid: 7b39457d86700bb45bc04b846f3c69aa, type: 3}
 --- !u!1 &8586932004954592269 stripped
 GameObject:
@@ -774,6 +777,7 @@ MonoBehaviour:
   Automatic: 0
   CurrentCoolDown: 0
   burst: 0
+  revolver: 0
   BurstCount: 3
   BurstInterval: 0.1
 --- !u!114 &3447948722288608164
@@ -806,6 +810,21 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!111 &5538960480877416191
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586932004954592269}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &8586932004954870603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 433514, guid: 7b39457d86700bb45bc04b846f3c69aa, type: 3}

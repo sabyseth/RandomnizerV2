@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class GunDamage : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public Animator animator;
+    //[SerializeField] private Animator animator;
+    private Animation anim;
     private InputAction fireAction;
     public float Damage;
     public Recoil RecoilObject;
@@ -34,7 +35,9 @@ public class GunDamage : MonoBehaviour
         
         fireAction = playerInput.actions["Fire"];
         PlayerCamera = Camera.main.transform;
-        animator = gameObject.GetComponent<Animator>();
+       // if (animator == null) animator = GetComponent<Animator>();
+   // animator.SetBool("cocked", false);
+        anim = GetComponent<Animation>();
     }
 
     private void Update()
@@ -50,9 +53,10 @@ public class GunDamage : MonoBehaviour
                 }
                 }
                 if (revolver == true){
-                animator.SetTrigger("COCKED");
+                    Debug.Log("revo");
+                    anim.Play("Hammer");
+                   // new WaitForSeconds(0.5f);
                 Shoot();
-                animator.ResetTrigger("COCKED");
                 CurrentCoolDown = FireCoolDown;
                 }
                 else {

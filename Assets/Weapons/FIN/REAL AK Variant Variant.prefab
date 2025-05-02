@@ -103,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6976477143912562050, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 946921105004920720}
+    - targetCorrespondingSourceObject: {fileID: 6976477143912562050, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6061760113044812225}
   m_SourcePrefab: {fileID: 100100000, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}
 --- !u!1 &137657445420054333 stripped
 GameObject:
@@ -139,6 +142,21 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!111 &6061760113044812225
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137657445420054333}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &372498002924467557 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7211110441330933722, guid: 32b4bc118fd4e4f089bac0cad03c8f2d, type: 3}

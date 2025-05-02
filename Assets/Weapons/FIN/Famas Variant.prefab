@@ -62,8 +62,31 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4082870632829742846, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4189340941159031231}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3738715129311704132, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4446919225175746315}
   m_SourcePrefab: {fileID: 100100000, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
+--- !u!1 &8632585038219748575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3738715129311704132, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
+  m_PrefabInstance: {fileID: 4913303786827550875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &4446919225175746315
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632585038219748575}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &8973082466613001829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4082870632829742846, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
