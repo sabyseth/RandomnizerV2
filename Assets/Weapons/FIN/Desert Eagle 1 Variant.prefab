@@ -109,6 +109,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
+      propertyPath: recoilamount
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
       propertyPath: OnGunShoot.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}

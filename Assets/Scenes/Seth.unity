@@ -514,8 +514,8 @@ MonoBehaviour:
   standHeight: 6
   crouchHeight: 1
   crouchHeightResponse: 15
-  standCameraTargetHeight: 0.9
-  crouchCameraTargetHeight: 0.7
+  standCameraTargetHeight: 0.5
+  crouchCameraTargetHeight: 0.5
 --- !u!4 &378913160
 Transform:
   m_ObjectHideFlags: 0
@@ -1064,7 +1064,7 @@ Transform:
   m_GameObject: {fileID: 778546122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalPosition: {x: 0, y: -2.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1860,7 +1860,7 @@ Transform:
   m_GameObject: {fileID: 1759249956}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30318633, y: -0.019345494, z: -0.00029574663, w: 0.9527349}
-  m_LocalPosition: {x: 2.23, y: 2, z: 4.04}
+  m_LocalPosition: {x: 2.16, y: -0.92, z: 4.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
