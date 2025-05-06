@@ -73,6 +73,8 @@ public class networkManagerUI : NetworkBehaviour
         {
             NetworkManager.Singleton.StartClient();
             role = "Client";
+            roleColor = Color.green;
+            playerColor.color = roleColor;
         };
 
         if (evt.currentTarget.Equals(_host))
@@ -80,7 +82,8 @@ public class networkManagerUI : NetworkBehaviour
             NetworkManager.Singleton.StartHost();
             role = "Host";
             roleColor = Color.red;
-            //changeColor();
+            playerColor.color = roleColor;
+
         };
     }
 
@@ -88,22 +91,4 @@ public class networkManagerUI : NetworkBehaviour
     {
         
     }
-    // public void changeColor()
-    // {
-    //     // Get the Renderer component
-    //     // Check if the Renderer exists
-    //     if (renderer != null)
-    //     {
-    //         // Change the color of the material
-    //         renderer.material.color = roleColor;
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("No Renderer component found on this GameObject.");
-    //     }
-    // }
-    // void Update()
-    // {
-
-    // }
 }

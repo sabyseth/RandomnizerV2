@@ -14,6 +14,8 @@ public class PlayerCamera : NetworkBehaviour
 
     public void Initialize(Transform target)
     {
+        // if(!IsHost) return;
+        // if(!IsLocalPlayer) return; 
         transform.position = target.position;
         transform.eulerAngles = _eulerAngles = target.eulerAngles;
         
@@ -21,6 +23,8 @@ public class PlayerCamera : NetworkBehaviour
 
     public void UpdateRotation(CameraInput input)
 {
+    // if(!IsHost) return;
+    // if(!IsLocalPlayer) return; 
     // Update the pitch (X-axis) and yaw (Y-axis)
     _eulerAngles.x += -input.Look.y * sensitivity;
     _eulerAngles.y += input.Look.x * sensitivity;
@@ -35,6 +39,8 @@ public class PlayerCamera : NetworkBehaviour
 
     public void UpdatePosition(Transform target)
     {
+        // if(!IsHost) return;
+        // if(!IsLocalPlayer) return; 
         transform.position = target.position;
     }
 }

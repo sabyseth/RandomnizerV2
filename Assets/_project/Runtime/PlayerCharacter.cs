@@ -113,6 +113,8 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
 
     public void UpdateInput(CharacterInput input)
     {
+        if(!IsHost) return;
+        if(!IsLocalPlayer) return;
         if (input.Sprint == SprintInput.Toggle)
         {
             _state.Stance = Stance.Sprint;
@@ -445,6 +447,8 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
+        if(!IsHost) return;
+        if(!IsLocalPlayer) return;
         // Update the character's rotation to face in the same direction as the
         // requested rotation (camera rotation).
 
