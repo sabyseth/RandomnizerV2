@@ -148,6 +148,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon9",
+                    "type": "Button",
+                    "id": "91e2bd11-2354-464a-a52b-099caf68d115",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -390,6 +399,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Weapon8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dae6cfbb-28c2-47df-b905-859da1bb3d8d",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon9",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

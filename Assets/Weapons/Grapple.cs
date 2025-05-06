@@ -31,7 +31,6 @@ public class GrapplingGun : MonoBehaviour
     private void Update()
     {
         bool isGrapplePressed = playerInput.actions["Grapple"].IsPressed();
-        
         if (isGrapplePressed && !wasGrapplePressed)
         {
             StartGrapple();
@@ -40,7 +39,6 @@ public class GrapplingGun : MonoBehaviour
         {
             StopGrapple();
         }
-        
         wasGrapplePressed = isGrapplePressed;
         if (lr.positionCount > 0 && Vector3.Distance(motor.TransientPosition, grapplePoint) < 3f)
         {

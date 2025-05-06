@@ -25,10 +25,11 @@ public class GunDamage : MonoBehaviour
     public bool Automatic;
     public float CurrentCoolDown;
     public bool burst;
-    public bool revolver = false;
+    public bool revolver;
     public int BurstCount = 3; 
     public float BurstInterval = 0.1f; 
     private bool isBursting = false;
+    public bool randum;
 
     private void Awake()
     {
@@ -38,6 +39,9 @@ public class GunDamage : MonoBehaviour
        // if (animator == null) animator = GetComponent<Animator>();
    // animator.SetBool("cocked", false);
         anim = GetComponent<Animation>();
+        if (randum){
+            FireCoolDown = Random.Range(0, 1); 
+        }
     }
 
     private void Update()
@@ -56,7 +60,7 @@ public class GunDamage : MonoBehaviour
                     Debug.Log("revo");
                     anim.Play("Hammer");
                    // new WaitForSeconds(0.5f);
-                Shoot();
+                Invoke("Shoot", .9f);
                 CurrentCoolDown = FireCoolDown;
                 }
                 else {
@@ -88,6 +92,9 @@ public class GunDamage : MonoBehaviour
 
     public void Shoot()
     {
+       // if (revolver == true){
+        //     new WaitForSeconds (3.0f);
+       // }
         MuzzleFlash.Play();
         RecoilObject.recoil += recoilamount;
         Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);

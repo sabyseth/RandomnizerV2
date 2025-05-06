@@ -92,7 +92,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1021653259612222528, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0747
+      value: 0.0726
       objectReference: {fileID: 0}
     - target: {fileID: 1021653259612222528, guid: 2feafb5676288b74f9e718994868fb8c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -221,7 +221,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  FireCoolDown: 0.5
+  FireCoolDown: 1
   Automatic: 0
   CurrentCoolDown: 0
   burst: 0
@@ -268,7 +268,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

@@ -55,7 +55,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-   
         if (playerInput.actions["Weapon1"].triggered) SwitchWeapon(0);
         if (playerInput.actions["Weapon2"].triggered) SwitchWeapon(1);
         if (playerInput.actions["Weapon3"].triggered) SwitchWeapon(2);
@@ -64,6 +63,7 @@ public class WeaponManager : MonoBehaviour
         if (playerInput.actions["Weapon6"].triggered) SwitchWeapon(5);
         if (playerInput.actions["Weapon7"].triggered) SwitchWeapon(6);
         if (playerInput.actions["Weapon8"].triggered) SwitchWeapon(7);
+        if (playerInput.actions["Weapon9"].triggered) SwitchWeapon(8);
     }
 
     private void SwitchWeapon(int newWeaponIndex)
