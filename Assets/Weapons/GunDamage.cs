@@ -40,7 +40,7 @@ public class GunDamage : MonoBehaviour
    // animator.SetBool("cocked", false);
         anim = GetComponent<Animation>();
         if (randum){
-            FireCoolDown = Random.Range(0, 1); 
+            double x = Random.Range(1, 10); 
         }
     }
 

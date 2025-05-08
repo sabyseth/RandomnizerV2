@@ -5,13 +5,15 @@ public class Flaregun : MonoBehaviour {
 	
 	public Rigidbody flareBullet;
 	public Transform barrelEnd;
+	public float Damage;
+	public float BulletRange;
 	public GameObject muzzleParticles;
 	public AudioClip flareShotSound;
 	public AudioClip noAmmoSound;	
 	public AudioClip reloadSound;	
 	public int bulletSpeed = 2000;
-	public int maxSpareRounds = 5;
-	public int spareRounds = 3;
+	public int maxSpareRounds = 100;
+	public int spareRounds = 100;
 	public int currentRound = 0;
 	
 	// Update is called once per frame
@@ -42,17 +44,23 @@ public class Flaregun : MonoBehaviour {
 			currentRound = 0;
 		}
 		
+		
 			GetComponent<Animation>().CrossFade("Shoot");
 			GetComponent<AudioSource>().PlayOneShot(flareShotSound);
 		
 			
 			Rigidbody bulletInstance;			
 			bulletInstance = Instantiate(flareBullet,barrelEnd.position,barrelEnd.rotation) as Rigidbody; //INSTANTIATING THE FLARE PROJECTILE
-			
-			
-			bulletInstance.AddForce(barrelEnd.forward * bulletSpeed); //ADDING FORWARD FORCE TO THE FLARE PROJECTILE
-			
+			bulletInstance.AddForce(barrelEnd.forward * bulletSpeed * 10); //ADDING FORWARD FORCE TO THE FLARE PROJECTILE
+			Ray gunRay = new Ray(barrelEnd.position, barrelEnd.forward);
 			Instantiate(muzzleParticles, barrelEnd.position,barrelEnd.rotation);	//INSTANTIATING THE GUN'S MUZZLE SPARKS	
+			 if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
+        {
+			 if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
+            {
+                enemy.Health -= Damage;
+            }
+		}
 	}
 	
 	void Reload()
@@ -66,3 +74,4 @@ public class Flaregun : MonoBehaviour {
 		
 	}
 }
+

@@ -186,14 +186,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flareBullet: {fileID: 5400000, guid: 502f397bde12655448ff152eac00cdc7, type: 3}
   barrelEnd: {fileID: 400002}
+  Damage: 100
+  BulletRange: 1000
   muzzleParticles: {fileID: 101206, guid: 0d6d0598d4c6d514bbf8228309023a4d, type: 3}
   flareShotSound: {fileID: 8300000, guid: 0f01458ab91c1ac4883d0e6e549bff26, type: 3}
   noAmmoSound: {fileID: 8300000, guid: 33b4f082caddfbd479b447561a4339b4, type: 3}
   reloadSound: {fileID: 8300000, guid: 83c52e0124588cb41b7c1c200f457a50, type: 3}
   bulletSpeed: 2000
-  maxSpareRounds: 5
-  spareRounds: 3
-  currentRound: 0
+  maxSpareRounds: 101
+  spareRounds: 100
+  currentRound: 1
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 0
