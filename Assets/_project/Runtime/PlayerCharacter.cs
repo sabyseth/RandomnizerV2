@@ -51,6 +51,7 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
     [Space]
+    [SerializeField] private Animator animator;
     [SerializeField] private CharacterInfo characterInfo;
     [Space]
     [SerializeField] private float sprintSpeed = 35f;
@@ -233,7 +234,7 @@ public void StopGrapple()
             animator.SetBool("IsGrounded", _state.Grounded);
             animator.SetBool("IsCrouching", _state.Stance == Stance.Crouch);
             animator.SetBool("IsSliding", _state.Stance == Stance.Slide);
-            animator.SetBool("IsSprinting", _state.Stance == Stance.Sprint);
+         animator.SetBool("IsSprinting", _state.Stance == Stance.Sprint);
         }
         _state.Acceleration = Vector3.zero;
  if (_isGrappling)

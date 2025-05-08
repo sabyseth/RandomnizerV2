@@ -35,8 +35,8 @@ public class GunDamage : MonoBehaviour
     public Text ammoDisplay;
     private int clip;
     
-    public int BurstCount = 3; 
-    public float BurstInterval = 0.1f; 
+   // public int BurstCount = 3; 
+   // public float BurstInterval = 0.1f; 
     private bool isBursting = false;
     public bool randum;
 
