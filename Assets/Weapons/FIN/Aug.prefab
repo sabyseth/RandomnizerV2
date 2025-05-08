@@ -21,6 +21,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 328621789431213768, guid: fb64712b76ae24741bc1c4e8c16b6df7, type: 3}
     - target: {fileID: 901373805910997802, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
+      propertyPath: bulletSpeed
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 901373805910997802, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 7845385299982501022}
@@ -239,6 +243,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 594542157638105458, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7845385299982501022}
+    - targetCorrespondingSourceObject: {fileID: 594542157638105458, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1320012652218576594}
   m_SourcePrefab: {fileID: 100100000, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}
 --- !u!1 &3635287665516800598 stripped
 GameObject:
@@ -275,6 +282,21 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!111 &1320012652218576594
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635287665516800598}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &3941015387702110222 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 901373805910997802, guid: fe24a17e1ab1649c8ac48eafc7a8ef85, type: 3}

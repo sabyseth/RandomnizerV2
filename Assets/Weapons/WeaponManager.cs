@@ -15,7 +15,7 @@ public class WeaponManager : MonoBehaviour
         public bool isActive = false;
     }
 
-    [SerializeField] private Weapon[] weapons = new Weapon[7];
+    [SerializeField] private Weapon[] weapons = new Weapon[8];
     [SerializeField] private int currentWeaponIndex = 0;
     
     private PlayerInput playerInput;
@@ -32,26 +32,20 @@ public class WeaponManager : MonoBehaviour
         {
             if (weapons[i].weaponPrefab != null && weapons[i].weaponInstance == null)
             {
-              
+                
                 weapons[i].weaponInstance = Instantiate(
                     weapons[i].weaponPrefab, 
-                    weapons[i].weaponParent
-                );
-                
-                
+                    weapons[i].weaponParent);
                 weapons[i].weaponInstance.transform.localPosition = weapons[i].localPosition;
                 weapons[i].weaponInstance.transform.localRotation = weapons[i].localRotation;
                 weapons[i].weaponInstance.transform.localScale = weapons[i].localScale;
-                
                 weapons[i].weaponInstance.SetActive(false);
-                
-                
                 var rb = weapons[i].weaponInstance.GetComponent<Rigidbody>();
                 if (rb != null) rb.isKinematic = true;
             }
         }
         
-       
+      
         if (weapons.Length > 0 && weapons[currentWeaponIndex].weaponInstance != null)
         {
             weapons[currentWeaponIndex].weaponInstance.SetActive(true);
@@ -61,7 +55,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-   
         if (playerInput.actions["Weapon1"].triggered) SwitchWeapon(0);
         if (playerInput.actions["Weapon2"].triggered) SwitchWeapon(1);
         if (playerInput.actions["Weapon3"].triggered) SwitchWeapon(2);
@@ -69,6 +62,8 @@ public class WeaponManager : MonoBehaviour
         if (playerInput.actions["Weapon5"].triggered) SwitchWeapon(4);
         if (playerInput.actions["Weapon6"].triggered) SwitchWeapon(5);
         if (playerInput.actions["Weapon7"].triggered) SwitchWeapon(6);
+        if (playerInput.actions["Weapon8"].triggered) SwitchWeapon(7);
+        if (playerInput.actions["Weapon9"].triggered) SwitchWeapon(8);
     }
 
     private void SwitchWeapon(int newWeaponIndex)
@@ -79,17 +74,11 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-        
-   
         weapons[currentWeaponIndex].weaponInstance.SetActive(false);
         weapons[currentWeaponIndex].isActive = false;
-        
-      
         currentWeaponIndex = newWeaponIndex;
         weapons[currentWeaponIndex].weaponInstance.SetActive(true);
         weapons[currentWeaponIndex].isActive = true;
-        
-        
         weapons[currentWeaponIndex].weaponInstance.transform.localPosition = weapons[currentWeaponIndex].localPosition;
         weapons[currentWeaponIndex].weaponInstance.transform.localRotation = weapons[currentWeaponIndex].localRotation;
     }

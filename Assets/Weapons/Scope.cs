@@ -19,21 +19,18 @@ public class Scope : MonoBehaviour
     {
         fireAction = playerInput.actions["Scope"];
         shootAction = playerInput.actions["Fire"];
-        
-        
         scopeOverlay.SetActive(false);
     }
 
     void Update()
     {
-     
         if (fireAction.WasPressedThisFrame())
         {
             if (!IsScoped)
             {
                 IsScoped = true;
                 animator.SetBool("Scoped", IsScoped);
-                scopeOverlay.SetActive(true);  
+                scopeOverlay.SetActive(true); 
                 StartCoroutine(OnScoped());
             }
             else
@@ -41,8 +38,6 @@ public class Scope : MonoBehaviour
                 Unscoped();
             }
         }
-
-        
         if (shootAction.WasPressedThisFrame() && IsScoped)
         {
             Unscoped();

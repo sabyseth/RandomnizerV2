@@ -46,8 +46,8 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     public float FireCoolDown;
     public bool Automatic;
     public float CurrentCoolDown;
-    [SerializeField] private Animator animator;
-    [SerializeField] private KinematicCharacterMotor motor;
+    public UnityEvent OnGrappleStopped; 
+    [SerializeField] private KinematicCharacterMotor motor; //private LineRenderer lr;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
     [Space]
@@ -89,14 +89,23 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     private CharacterState _state;
     private CharacterState _lastState;
     private CharacterState _tempState;
-    
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
+    public float grappleAcceleration = 15f;
+    public float maxGrappleSpeed = 50f; 
+    public float grappleSpeed = 25f;
+    private bool _isGrappling;
+    private Vector3 _grapplePoint;
+    
+    private Vector3 _grappleVelocity;
+    private Vector3 _grappleDirection;
+    private float _currentGrappleSpeed;
     private bool _requestedJump;
     private bool _requestedStustainedJump;
 
     private bool _requestedCrouch;
     private bool _requestedCrouchInAir;
+   
 
     private float _timeSinceUngrounded;
     private float _timeSinceJumpRequest;
@@ -197,6 +206,21 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
         );
 
     }
+public void StartGrapple(Vector3 point)
+{
+   _isGrappling = true;
+   _grapplePoint = point;
+    _grappleDirection = (point - motor.TransientPosition).normalized;
+    _currentGrappleSpeed = grappleSpeed; // Start with base speed
+    motor.ForceUnground();
+}
+
+public void StopGrapple()
+{
+    _isGrappling = false;
+   // OnGrappleStopped?.Invoke();
+  // lr.positionCount = 0;
+}
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
@@ -212,7 +236,27 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
             animator.SetBool("IsSprinting", _state.Stance == Stance.Sprint);
         }
         _state.Acceleration = Vector3.zero;
-
+ if (_isGrappling)
+{
+    _currentGrappleSpeed = Mathf.Min(
+        _currentGrappleSpeed + grappleAcceleration * deltaTime,
+        maxGrappleSpeed
+    );
+    
+    currentVelocity = _grappleDirection * _currentGrappleSpeed;
+    
+    
+    float distance = Vector3.Distance(motor.TransientPosition, _grapplePoint);
+    if (distance < 5f) {
+        currentVelocity *= distance / 5f; 
+        
+      
+        if (distance < 3f) {
+            StopGrapple();
+        }
+    }
+    return;
+}
         // If on the ground...
         if (motor.GroundingStatus.IsStableOnGround)
         {

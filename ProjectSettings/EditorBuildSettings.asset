@@ -12,4 +12,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Seth.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: cff572832fc0c436c8f4e15bb993ba0a, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: ebea81da72a5d48a1909bcf8771fd227, type: 3}

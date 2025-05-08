@@ -139,6 +139,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "82aa82d4-2ec6-405f-a248-e25c9ddfca49",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon8",
+                    "type": "Button",
+                    "id": "640393ca-e716-4c38-a756-61d04764376a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon9",
+                    "type": "Button",
+                    "id": "91e2bd11-2354-464a-a52b-099caf68d115",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -364,12 +391,34 @@
                 },
                 {
                     "name": "",
-                    "id": "81228657-ec12-46e4-b709-819ce4f31383",
-                    "path": "<Keyboard>/#(R)",
+                    "id": "74a81fc9-5120-4104-a20c-c6b0ca93d0c7",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reload",
+                    "action": "Grapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ec6d8a0-09c2-4007-9879-8087c09d6ea5",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dae6cfbb-28c2-47df-b905-859da1bb3d8d",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon9",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

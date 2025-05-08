@@ -147,6 +147,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 243074045811384988, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1607195987110717156}
+    - targetCorrespondingSourceObject: {fileID: 243074045811384988, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8151809369256836830}
   m_SourcePrefab: {fileID: 100100000, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
 --- !u!114 &450092081939544049 stripped
 MonoBehaviour:
@@ -194,3 +197,18 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!111 &8151809369256836830
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5837920173301214964}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a92c0085795604eec9d4784a1286fb6c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

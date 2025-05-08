@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class GunDamage : MonoBehaviour
 {
     public PlayerInput playerInput;
+    //[SerializeField] private Animator animator;
+    private Animation anim;
     private InputAction fireAction;
     private InputAction Reload;
     public float Damage;
@@ -26,6 +28,9 @@ public class GunDamage : MonoBehaviour
     public bool Automatic;
     public float CurrentCoolDown;
     public bool burst;
+    public bool revolver;
+    public int BurstCount = 3; 
+    public float BurstInterval = 0.1f; 
     public int ammo; 
     public Text ammoDisplay;
     private int clip;
@@ -33,13 +38,21 @@ public class GunDamage : MonoBehaviour
     public int BurstCount = 3; 
     public float BurstInterval = 0.1f; 
     private bool isBursting = false;
+    public bool randum;
 
     private void Awake()
     {
+        
    
         fireAction = playerInput.actions["Fire"];
         Reload = playerInput.actions["Reload"];
         PlayerCamera = Camera.main.transform;
+       // if (animator == null) animator = GetComponent<Animator>();
+   // animator.SetBool("cocked", false);
+        anim = GetComponent<Animation>();
+        if (randum){
+            double x = Random.Range(1, 10); 
+        }
         clip = ammo;  
     }
 
@@ -56,8 +69,16 @@ public class GunDamage : MonoBehaviour
                 if (burst == true){
                 if (!isBursting) 
                 {
+                    StartCoroutine(BurstFire());
                     StartCoroutine(BurstFire()); 
                 }
+                }
+                if (revolver == true){
+                    Debug.Log("revo");
+                    anim.Play("Hammer");
+                   // new WaitForSeconds(0.5f);
+                Invoke("Shoot", .9f);
+                CurrentCoolDown = FireCoolDown;
                 }
                 else {
 
@@ -73,6 +94,7 @@ public class GunDamage : MonoBehaviour
             ammo =+ clip; 
         }
 
+        
     
         CurrentCoolDown -= Time.deltaTime;
     }
@@ -84,6 +106,8 @@ public class GunDamage : MonoBehaviour
         for (int i = 0; i < BurstCount; i++)
         {
             Shoot();  
+            yield return new WaitForSeconds(BurstInterval); 
+            Shoot();  
             yield return new WaitForSeconds(BurstInterval);  
         }
 
@@ -94,16 +118,21 @@ public class GunDamage : MonoBehaviour
 
     public void Shoot()
     {
+       // if (revolver == true){
+        //     new WaitForSeconds (3.0f);
+       // }
         MuzzleFlash.Play();
         RecoilObject.recoil += recoilamount;
         Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);
         Debug.Log("Shot");
+        //animator.SetBool("cocked", false);
 
         
         if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
         {
             
             TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            StartCoroutine(SpawnTrail(trail, hitInfo.point)); 
             StartCoroutine(SpawnTrail(trail, hitInfo.point)); 
              
             if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
