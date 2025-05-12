@@ -157,6 +157,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Random",
+                    "type": "Button",
+                    "id": "c7136c8e-2c40-4425-95e8-44386520b856",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -410,6 +419,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Weapon9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1055389-f3dc-44b9-ac8c-d4437b7cc5c8",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Random",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

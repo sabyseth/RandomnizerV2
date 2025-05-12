@@ -982,7 +982,7 @@ MonoBehaviour:
   terrainMaterials:
   - {fileID: 2100000, guid: 1e025389d38224f4dab88b01018241c2, type: 2}
   - {fileID: 2100000, guid: ff7fd5ed0b8abad49a5bfb4727049a3c, type: 2}
-  - {fileID: 2100000, guid: 6867923e6c6e59c44b0835b1529e730b, type: 2}
+  - {fileID: 2100000, guid: 09c81ea2cae804bc0b43e4740096a36a, type: 2}
 --- !u!154 &444813457
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -2282,11 +2282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c4bcc3e2a5bf345999979d17bcf918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallThickness: 0.3
-  minWidth: 3
-  maxWidth: 10
-  minLength: 3
-  maxLength: 10
 --- !u!4 &1771055171
 Transform:
   m_ObjectHideFlags: 0

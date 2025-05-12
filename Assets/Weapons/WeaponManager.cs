@@ -23,6 +23,7 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        currentWeaponIndex = Random.Range(0, weapons.Length);
         InitializeWeapons();
     }
 
@@ -64,6 +65,7 @@ public class WeaponManager : MonoBehaviour
         if (playerInput.actions["Weapon7"].triggered) SwitchWeapon(6);
         if (playerInput.actions["Weapon8"].triggered) SwitchWeapon(7);
         if (playerInput.actions["Weapon9"].triggered) SwitchWeapon(8);
+        if (playerInput.actions["Random"].triggered) SwitchWeapon(Random.Range(0, weapons.Length));
     }
 
     private void SwitchWeapon(int newWeaponIndex)
