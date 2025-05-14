@@ -177,6 +177,16 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
         else if (!_requestedCrouch && wasRequestingCrouch)
             _requestedCrouchInAir = false;
     }
+    public void ApplyVelocityChange(Vector3 velocityChange)
+    {
+    _state.Velocity += velocityChange;
+    motor.BaseVelocity += velocityChange;
+    }  
+    public void StartFlareJump(Vector3 direction, float force)
+{
+    motor.ForceUnground();
+    ApplyVelocityChange(direction.normalized * force);
+}
 
     public void UpdateBody(float deltaTime)
     {
