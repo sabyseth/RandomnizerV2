@@ -14,6 +14,8 @@ public class PlayerCamera : NetworkBehaviour
 
     public void Initialize(Transform target)
     {
+        if(!IsOwner) return;
+        if(!IsLocalPlayer) return;
         // if(!IsHost) return;
         // if(!IsLocalPlayer) return; 
         transform.position = target.position;
@@ -23,6 +25,8 @@ public class PlayerCamera : NetworkBehaviour
 
     public void UpdateRotation(CameraInput input)
 {
+    if(!IsOwner) return;
+    if(!IsLocalPlayer) return;
     // if(!IsHost) return;
     // if(!IsLocalPlayer) return; 
     // Update the pitch (X-axis) and yaw (Y-axis)
@@ -39,8 +43,8 @@ public class PlayerCamera : NetworkBehaviour
 
     public void UpdatePosition(Transform target)
     {
-        // if(!IsHost) return;
-        // if(!IsLocalPlayer) return; 
+        if(!IsHost) return;
+        if(!IsLocalPlayer) return; 
         transform.position = target.position;
     }
 }

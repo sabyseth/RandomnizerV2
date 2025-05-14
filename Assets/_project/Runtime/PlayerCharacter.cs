@@ -113,8 +113,6 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
 
     public void UpdateInput(CharacterInput input)
     {
-        if(!IsHost) return;
-        if(!IsLocalPlayer) return;
         if (input.Sprint == SprintInput.Toggle)
         {
             _state.Stance = Stance.Sprint;

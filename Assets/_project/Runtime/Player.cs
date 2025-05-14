@@ -18,6 +18,8 @@ public class Player : NetworkBehaviour
 
     void Start()
     {
+        // if(!IsOwner) return;
+        // if(!IsLocalPlayer) return;
         Cursor.lockState = CursorLockMode.Locked;
 
         _inputActions = new PlayerInputActoions();
@@ -42,7 +44,6 @@ public class Player : NetworkBehaviour
         //Debug.Log("sdlkfjsdlfk");
         if(!IsOwner) return;
         if(!IsLocalPlayer) return;
-        //if(!isLocalPlayer) return;
         var input = _inputActions.Gameplay;
         var deltaTime = Time.deltaTime;
 
@@ -82,6 +83,8 @@ public class Player : NetworkBehaviour
 
     void LateUpdate()
     {
+        if(!IsOwner) return;
+        if(!IsLocalPlayer) return;
         var deltaTime = Time.deltaTime;
         var cameraTarget = playerCharacter.GetCameraTarget();
         var state = playerCharacter.GetState();

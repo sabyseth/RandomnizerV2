@@ -75,6 +75,7 @@ public class networkManagerUI : NetworkBehaviour
             role = "Client";
             roleColor = Color.green;
             playerColor.color = roleColor;
+            // NetworkObject.Spawn();
         };
 
         if (evt.currentTarget.Equals(_host))
@@ -83,7 +84,7 @@ public class networkManagerUI : NetworkBehaviour
             role = "Host";
             roleColor = Color.red;
             playerColor.color = roleColor;
-
+            //NetworkObject.Spawn();
         };
     }
 
