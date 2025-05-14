@@ -4,12 +4,25 @@
 }
 
 .button {
-    font-size: 20px;
-    width: 355px;
-    height: 92px;
+    font-size: 30px;
+    width: 450px;
+    height: 150px;
     align-self: flex-start;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    background-image: url("project://database/Assets/Buttons/PNG/12Button_Long_Blue.png?fileID=2800000&guid=4e75355f0aa718a498d932c89b2b994c&type=3#12Button_Long_Blue");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    position: relative;
+    margin-top: 10px;
+    margin-left: 50px;
+    -unity-font-style: bold;
+    padding-bottom: 0;
+    padding-top: 0;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    top: 10%;
 }
