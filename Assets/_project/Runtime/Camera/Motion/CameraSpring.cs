@@ -17,6 +17,7 @@ public class CameraSpring : NetworkBehaviour
 
     public void Initialize()
     {
+        if(!IsOwner){ Debug.Log("Not spring owner");  return; };
         _springPosition = transform.position;
         _springVelocity = Vector3.zero;
 
