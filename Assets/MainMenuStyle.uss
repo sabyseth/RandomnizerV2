@@ -1,22 +1,23 @@
 .header {
     font-size: 40px;
     color: rgb(255, 255, 255);
+    background-image: none;
 }
 
 .button {
-    font-size: 30px;
-    width: 450px;
+    font-size: 75px;
+    width: 500px;
     height: 150px;
     align-self: flex-start;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    background-image: url("project://database/Assets/Buttons/PNG/12Button_Long_Blue.png?fileID=2800000&guid=4e75355f0aa718a498d932c89b2b994c&type=3#12Button_Long_Blue");
-    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/Buttons/PNG/19bttn-midl.png?fileID=2800000&guid=aa3bf53c498deb44b80ad60af801942c&type=3#19bttn-midl");
+    -unity-background-image-tint-color: rgb(207, 202, 202);
     position: relative;
-    margin-top: 10px;
-    margin-left: 50px;
+    margin-top: 85px;
+    margin-left: 88px;
     -unity-font-style: bold;
     padding-bottom: 0;
     padding-top: 0;
@@ -24,5 +25,7 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    top: 10%;
+    top: 9%;
+    -unity-text-align: middle-center;
+    text-overflow: clip;
 }

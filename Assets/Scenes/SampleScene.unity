@@ -761,9 +761,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 630646457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b30032d66c3344e997b372db6a3b9be, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e50e8cee8b0d4bab95063693d5ac451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: New Scene
 --- !u!4 &673546211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: 0f7284f1c1bbe4c248ea286e66734275, type: 3}
@@ -1762,7 +1763,7 @@ GameObject:
   - component: {fileID: 1664299323}
   - component: {fileID: 1664299322}
   m_Layer: 0
-  m_Name: Terrain
+  m_Name: Ground
   m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

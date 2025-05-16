@@ -188,6 +188,15 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""17e4eed7-5029-410b-addb-ec1737615694"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -443,6 +452,17 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""action"": ""Weapon9"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11a455ce-5d67-444e-9159-557fec31fed7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -469,6 +489,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         m_Gameplay_Grapple = m_Gameplay.FindAction("Grapple", throwIfNotFound: true);
         m_Gameplay_Weapon8 = m_Gameplay.FindAction("Weapon8", throwIfNotFound: true);
         m_Gameplay_Weapon9 = m_Gameplay.FindAction("Weapon9", throwIfNotFound: true);
+        m_Gameplay_ESC = m_Gameplay.FindAction("ESC", throwIfNotFound: true);
     }
 
     ~@PlayerInputActoions()
@@ -553,6 +574,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Grapple;
     private readonly InputAction m_Gameplay_Weapon8;
     private readonly InputAction m_Gameplay_Weapon9;
+    private readonly InputAction m_Gameplay_ESC;
     public struct GameplayActions
     {
         private @PlayerInputActoions m_Wrapper;
@@ -575,6 +597,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         public InputAction @Grapple => m_Wrapper.m_Gameplay_Grapple;
         public InputAction @Weapon8 => m_Wrapper.m_Gameplay_Weapon8;
         public InputAction @Weapon9 => m_Wrapper.m_Gameplay_Weapon9;
+        public InputAction @ESC => m_Wrapper.m_Gameplay_ESC;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -638,6 +661,9 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon9.started += instance.OnWeapon9;
             @Weapon9.performed += instance.OnWeapon9;
             @Weapon9.canceled += instance.OnWeapon9;
+            @ESC.started += instance.OnESC;
+            @ESC.performed += instance.OnESC;
+            @ESC.canceled += instance.OnESC;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -696,6 +722,9 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon9.started -= instance.OnWeapon9;
             @Weapon9.performed -= instance.OnWeapon9;
             @Weapon9.canceled -= instance.OnWeapon9;
+            @ESC.started -= instance.OnESC;
+            @ESC.performed -= instance.OnESC;
+            @ESC.canceled -= instance.OnESC;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -733,5 +762,6 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         void OnGrapple(InputAction.CallbackContext context);
         void OnWeapon8(InputAction.CallbackContext context);
         void OnWeapon9(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
     }
 }
