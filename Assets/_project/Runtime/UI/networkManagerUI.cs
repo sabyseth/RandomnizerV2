@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using Mono.Cecil.Cil;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,12 +22,31 @@ public class networkManagerUI : NetworkBehaviour
     public Color roleColor;
 
 
+    private void debugMessage()
+{
+    Debug.Log($"IsServer: {NetworkManager.Singleton.IsServer}");
+    Debug.Log($"IsHost: {NetworkManager.Singleton.IsHost}");
+    Debug.Log($"IsClient: {NetworkManager.Singleton.IsClient}");
+
+    if (IsServer) // only server/host can access ConnectedClients
+    {
+        Debug.Log("Running on server.");
+        Debug.Log($"OwnerClientId: {OwnerClientId}");
+        Debug.Log($"Client in ConnectedClients? {NetworkManager.Singleton.ConnectedClients.ContainsKey(OwnerClientId)}");
+    }
+    else
+    {
+        Debug.Log("Running on client. Skipping server-only checks.");
+    }
+
+    roleTextUpdate();
+}
+
     private void Awake()
     {
-        
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        
+
         roleText = root.Q<Label>("NetworkRole");
         roleText = root.Q("NetworkRole") as Label;
 
@@ -36,29 +57,19 @@ public class networkManagerUI : NetworkBehaviour
         _client = root.Q("Client") as Button;
         _client.RegisterCallback<ClickEvent>(onServerClick);
 
-        // _serverUIButtons = root.Query<Button>().ToList();
-        // for (int i = 0; i < _serverUIButtons.Count; i++)
-        // {
-        //     _serverUIButtons[i].RegisterCallback<ClickEvent>(OnAllButtonsClick);
-        //     if(i == 0) { }
-        // }
-        InvokeRepeating("roleTextUpdate", 0f, 5f);
-        
+
     }
-        
+
     public void roleTextUpdate()
     {
         roleText.text = role;
     }
-    
+
     private void OnDisable()
     {
         _server.UnregisterCallback<ClickEvent>(onServerClick);
+        NetworkManager.Singleton.Shutdown();
 
-        for (int i = 0; i < _serverUIButtons.Count; i++)
-        {
-            _serverUIButtons[i].UnregisterCallback<ClickEvent>(OnAllButtonsClick);
-        }
     }
 
     private void onServerClick(ClickEvent evt)
@@ -67,7 +78,8 @@ public class networkManagerUI : NetworkBehaviour
         {
             NetworkManager.Singleton.StartServer();
             role = "client";
-        };
+        }
+        ;
 
         if (evt.currentTarget.Equals(_client))
         {
@@ -75,8 +87,8 @@ public class networkManagerUI : NetworkBehaviour
             role = "Client";
             roleColor = Color.green;
             playerColor.color = roleColor;
-            // NetworkObject.Spawn();
-        };
+        }
+        ;
 
         if (evt.currentTarget.Equals(_host))
         {
@@ -84,12 +96,9 @@ public class networkManagerUI : NetworkBehaviour
             role = "Host";
             roleColor = Color.red;
             playerColor.color = roleColor;
-            //NetworkObject.Spawn();
         };
+        InvokeRepeating("debugMessage", 0f, 5f);
+
     }
 
-    private void OnAllButtonsClick(ClickEvent evt)
-    {
-        
-    }
 }
