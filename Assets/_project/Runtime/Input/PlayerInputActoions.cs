@@ -190,7 +190,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ESC"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""17e4eed7-5029-410b-addb-ec1737615694"",
                     ""expectedControlType"": """",
@@ -460,7 +460,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ESC"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -489,7 +489,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         m_Gameplay_Grapple = m_Gameplay.FindAction("Grapple", throwIfNotFound: true);
         m_Gameplay_Weapon8 = m_Gameplay.FindAction("Weapon8", throwIfNotFound: true);
         m_Gameplay_Weapon9 = m_Gameplay.FindAction("Weapon9", throwIfNotFound: true);
-        m_Gameplay_ESC = m_Gameplay.FindAction("ESC", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@PlayerInputActoions()
@@ -574,7 +574,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Grapple;
     private readonly InputAction m_Gameplay_Weapon8;
     private readonly InputAction m_Gameplay_Weapon9;
-    private readonly InputAction m_Gameplay_ESC;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @PlayerInputActoions m_Wrapper;
@@ -597,7 +597,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         public InputAction @Grapple => m_Wrapper.m_Gameplay_Grapple;
         public InputAction @Weapon8 => m_Wrapper.m_Gameplay_Weapon8;
         public InputAction @Weapon9 => m_Wrapper.m_Gameplay_Weapon9;
-        public InputAction @ESC => m_Wrapper.m_Gameplay_ESC;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -661,9 +661,9 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon9.started += instance.OnWeapon9;
             @Weapon9.performed += instance.OnWeapon9;
             @Weapon9.canceled += instance.OnWeapon9;
-            @ESC.started += instance.OnESC;
-            @ESC.performed += instance.OnESC;
-            @ESC.canceled += instance.OnESC;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -722,9 +722,9 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon9.started -= instance.OnWeapon9;
             @Weapon9.performed -= instance.OnWeapon9;
             @Weapon9.canceled -= instance.OnWeapon9;
-            @ESC.started -= instance.OnESC;
-            @ESC.performed -= instance.OnESC;
-            @ESC.canceled -= instance.OnESC;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -762,6 +762,6 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         void OnGrapple(InputAction.CallbackContext context);
         void OnWeapon8(InputAction.CallbackContext context);
         void OnWeapon9(InputAction.CallbackContext context);
-        void OnESC(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

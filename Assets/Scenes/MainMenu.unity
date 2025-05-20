@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e50e8cee8b0d4bab95063693d5ac451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: New Scene
+  sceneToLoad: Seth
 --- !u!4 &673546211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: 0f7284f1c1bbe4c248ea286e66734275, type: 3}

@@ -34,9 +34,12 @@ public class Player : NetworkBehaviour
 
     void OnDestroy()
     {
-        _inputActions.Dispose();
+        if (_inputActions != null)
+        {
+            _inputActions.Dispose();
+        }
     }
-
+    
     void Update()
     {  
         //Debug.Log("sdlkfjsdlfk");
