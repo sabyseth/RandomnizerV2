@@ -46,6 +46,10 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
     public bool Automatic;
     public float CurrentCoolDown;
     public UnityEvent OnGrappleStopped; 
+    private bool onBus;
+    private Vector3 lastBusPosition;
+    private Transform currentBus;
+
     [SerializeField] private KinematicCharacterMotor motor; //private LineRenderer lr;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
@@ -122,7 +126,24 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
 
         CurrentCoolDown = FireCoolDown;
     }
-
+void Update()
+{
+    if (onBus && currentBus != null)
+    {
+        // Calculate how much bus moved this frame
+        Vector3 busMovement = currentBus.position - lastBusPosition;
+        
+        // Move player by same amount
+        motor.SetPosition(motor.TransientPosition + busMovement);
+        
+        // Store for next frame
+        lastBusPosition = currentBus.position;
+    }
+    else
+    {
+        onBus = false;
+    }
+}
     public void UpdateInput(CharacterInput input)
     {
         if (input.Sprint == SprintInput.Toggle)
@@ -177,10 +198,19 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
         else if (!_requestedCrouch && wasRequestingCrouch)
             _requestedCrouchInAir = false;
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+{
+    if (hit.collider.CompareTag("Bus") && !onBus)
+    {
+        onBus = true;
+        currentBus = hit.transform;
+        lastBusPosition = currentBus.position;
+    }
+}
     public void ApplyVelocityChange(Vector3 velocityChange)
     {
-    _state.Velocity += velocityChange;
-    motor.BaseVelocity += velocityChange;
+        _state.Velocity += velocityChange;
+        motor.BaseVelocity += velocityChange;
     }  
     public void StartFlareJump(Vector3 direction, float force)
 {
@@ -215,14 +245,14 @@ public class PlayerCharacter : NetworkBehaviour, ICharacterController
         );
 
     }
-public void StartGrapple(Vector3 point)
-{
-   _isGrappling = true;
-   _grapplePoint = point;
-    _grappleDirection = (point - motor.TransientPosition).normalized;
-    _currentGrappleSpeed = grappleSpeed; // Start with base speed
-    motor.ForceUnground();
-}
+    public void StartGrapple(Vector3 point)
+    {
+        _isGrappling = true;
+        _grapplePoint = point;
+        _grappleDirection = (point - motor.TransientPosition).normalized;
+        _currentGrappleSpeed = grappleSpeed; // Start with base speed
+        motor.ForceUnground();
+    }
 
 public void StopGrapple()
 {
@@ -233,6 +263,7 @@ public void StopGrapple()
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+
         characterInfo.SetStateText(_state.Stance.ToString());   
         characterInfo.SetFloatValue(currentVelocity.magnitude);
         _state.Acceleration = Vector3.zero;
@@ -523,6 +554,10 @@ public void StopGrapple()
 
     public void BeforeCharacterUpdate(float deltaTime)
     {
+        if (motor.transform.parent != null)
+    {
+    return;
+    }
         _tempState = _state;
 
         // Crouch.
