@@ -190,9 +190,18 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""Random"",
                     ""type"": ""Button"",
-                    ""id"": ""17e4eed7-5029-410b-addb-ec1737615694"",
+                    ""id"": ""c7136c8e-2c40-4425-95e8-44386520b856"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b7a001b-f681-43d1-97ea-e206673dbba0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -455,12 +464,23 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""11a455ce-5d67-444e-9159-557fec31fed7"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""f1055389-f3dc-44b9-ac8c-d4437b7cc5c8"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pause"",
+                    ""action"": ""Random"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edf5ff0d-9cea-4185-aa11-88002cfd1b5d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -489,7 +509,8 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         m_Gameplay_Grapple = m_Gameplay.FindAction("Grapple", throwIfNotFound: true);
         m_Gameplay_Weapon8 = m_Gameplay.FindAction("Weapon8", throwIfNotFound: true);
         m_Gameplay_Weapon9 = m_Gameplay.FindAction("Weapon9", throwIfNotFound: true);
-        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_Random = m_Gameplay.FindAction("Random", throwIfNotFound: true);
+        m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
     }
 
     ~@PlayerInputActoions()
@@ -574,7 +595,8 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Grapple;
     private readonly InputAction m_Gameplay_Weapon8;
     private readonly InputAction m_Gameplay_Weapon9;
-    private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_Random;
+    private readonly InputAction m_Gameplay_Reload;
     public struct GameplayActions
     {
         private @PlayerInputActoions m_Wrapper;
@@ -597,7 +619,8 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         public InputAction @Grapple => m_Wrapper.m_Gameplay_Grapple;
         public InputAction @Weapon8 => m_Wrapper.m_Gameplay_Weapon8;
         public InputAction @Weapon9 => m_Wrapper.m_Gameplay_Weapon9;
-        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @Random => m_Wrapper.m_Gameplay_Random;
+        public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -661,9 +684,12 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon9.started += instance.OnWeapon9;
             @Weapon9.performed += instance.OnWeapon9;
             @Weapon9.canceled += instance.OnWeapon9;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
+            @Random.started += instance.OnRandom;
+            @Random.performed += instance.OnRandom;
+            @Random.canceled += instance.OnRandom;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -722,9 +748,12 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
             @Weapon9.started -= instance.OnWeapon9;
             @Weapon9.performed -= instance.OnWeapon9;
             @Weapon9.canceled -= instance.OnWeapon9;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
+            @Random.started -= instance.OnRandom;
+            @Random.performed -= instance.OnRandom;
+            @Random.canceled -= instance.OnRandom;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -762,6 +791,7 @@ public partial class @PlayerInputActoions: IInputActionCollection2, IDisposable
         void OnGrapple(InputAction.CallbackContext context);
         void OnWeapon8(InputAction.CallbackContext context);
         void OnWeapon9(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
+        void OnRandom(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

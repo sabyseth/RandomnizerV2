@@ -22,10 +22,11 @@ public class GrapplingGun : MonoBehaviour
     private bool wasGrapplePressed = false;
     private float distance;
 
-    private void Awake() 
+    private void Awake()
     {
         if (lr == null) lr = GetComponent<LineRenderer>();
         playerInput = GetComponent<PlayerInput>();
+        StopGrapple();
     }
 
     private void Update()

@@ -168,9 +168,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Random",
                     "type": "Button",
-                    "id": "17e4eed7-5029-410b-addb-ec1737615694",
+                    "id": "c7136c8e-2c40-4425-95e8-44386520b856",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "9b7a001b-f681-43d1-97ea-e206673dbba0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -433,12 +442,23 @@
                 },
                 {
                     "name": "",
-                    "id": "11a455ce-5d67-444e-9159-557fec31fed7",
-                    "path": "<Keyboard>/escape",
+                    "id": "f1055389-f3dc-44b9-ac8c-d4437b7cc5c8",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "Random",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "edf5ff0d-9cea-4185-aa11-88002cfd1b5d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
