@@ -15,6 +15,7 @@ public class PlayerCamera : NetworkBehaviour
 
     public void Initialize(Transform target)
     {
+
         Debug.Log("Intitializig Camera");
         if (!IsOwner) { Debug.Log("Camera Initiliazation Stopped (Not the owner)"); return; }
         if (!IsLocalPlayer) { Debug.Log("Camera Initiliazation Stopped (Not the local player)"); return; }
@@ -24,6 +25,7 @@ public class PlayerCamera : NetworkBehaviour
         transform.eulerAngles = _eulerAngles = target.eulerAngles;
 
     }
+
 
     public void UpdateRotation(CameraInput input)
     {
@@ -47,6 +49,5 @@ public class PlayerCamera : NetworkBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position + Vector3.up, .5f);
-        //Gizmos.DrawSphere(, 0.4f);
     }
 }

@@ -32,6 +32,7 @@ public class Player : NetworkBehaviour
         cameraLean.Initialize();
 
         //stanceVignette.Initialize(volume.profile);
+        InvokeRepeating("debug",2f, 1f);
     }
 
     void OnDestroy()
@@ -39,6 +40,10 @@ public class Player : NetworkBehaviour
         _inputActions.Dispose();
     }
 
+    void debug()
+    {
+        Debug.Log($"Camera Target Pos: {playerCharacter.GetCameraTarget().position}");
+    }
     void Update()
     {  
         //Debug.Log("sdlkfjsdlfk");
@@ -83,8 +88,8 @@ public class Player : NetworkBehaviour
 
     void LateUpdate()
     {
-        if(!IsOwner) return;
-        if(!IsLocalPlayer) return;
+        if (!IsOwner) return;
+        if (!IsLocalPlayer) return;
         var deltaTime = Time.deltaTime;
         var cameraTarget = playerCharacter.GetCameraTarget();
         var state = playerCharacter.GetState();
@@ -93,13 +98,14 @@ public class Player : NetworkBehaviour
         cameraSpring.UpdateSpring(deltaTime, cameraTarget.up);
         cameraLean.UpdateLean
         (
-            deltaTime, 
-            state.Stance is Stance.Slide, 
-            state.Acceleration, 
+            deltaTime,
+            state.Stance is Stance.Slide,
+            state.Acceleration,
             cameraTarget.up
         );
 
         //stanceVignette.UpdateVignette(deltaTime, state.Stance);
+        
     }
 
     public void Teleport(Vector3 position)
