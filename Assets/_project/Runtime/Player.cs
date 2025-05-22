@@ -63,7 +63,8 @@ public class Player : NetworkBehaviour
                 ? SprintInput.Toggle
                 : SprintInput.None,
             Fire        = input.Fire.IsPressed(),
-            Scope       = input.Scope.IsPressed()
+            Scope       = input.Scope.IsPressed(),
+            Reload      = input.Reload.WasPressedThisFrame()
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);

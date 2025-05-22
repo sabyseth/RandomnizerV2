@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -11,38 +7,36 @@ public class Entity : MonoBehaviour
     [SerializeField] private GameObject targetPrefab;
     
     private float health;
+    public HealthBar healthBar;
 
     public float Health
     {
-        get
-        {
-            return health;
-        }
+        get => health;
         set
         {
             health = value;
-            Debug.Log("box's health: " + health);
-
+            Debug.Log("Entity's health: " + health);
+            
+            if (healthBar != null)
+                healthBar.SetHealth(health);
+            
             if (health <= 0f)
-            {
-                Destroy(gameObject);
-               // GameObject newTarget = Instantiate(targetPrefab);
-               // float randomX = Random.Range(collider.bounds.min.x, collider.bounds.max.x);
-                //float randomY = Random.Range(collider.bounds.min.y, collider.bounds.max.y);
-                //float randomZ = Random.Range(collider.bounds.min.z, collider.bounds.max.z);
-                //newTarget.transform.position = new Vector3(randomX, randomY, randomZ);
-                //newTarget.
-                health = StartingHealth;
-                Debug.Log(health);
-                
-            }
+                Die();
         }
     }
+
     void Start()
     {
         Health = StartingHealth;
+        if (healthBar != null)
+            healthBar.SetMaxHealth(StartingHealth);
     }
-   
 
+    private void Die()
+    {
+        if (targetPrefab != null)
+            Instantiate(targetPrefab, transform.position, transform.rotation);
+        
+        Destroy(gameObject); // This should NOT pause the game
+    }
 }
-

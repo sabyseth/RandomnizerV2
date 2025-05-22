@@ -97,12 +97,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
+      propertyPath: ammo
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1607195987110717156}
     - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
       propertyPath: FireCoolDown
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
+      propertyPath: recoilamount
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 6081244487038286745, guid: 9e7ef87758b6f41a283ed19a720e3185, type: 3}
       propertyPath: OnGunShoot.m_PersistentCalls.m_Calls.Array.size

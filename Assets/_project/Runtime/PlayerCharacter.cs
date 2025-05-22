@@ -35,6 +35,7 @@ public struct CharacterInput
     public CrouchInput Crouch;
     public SprintInput Sprint;
     public bool Fire;
+    public bool Reload;
 
     public bool Scope { get; internal set; }
 }
@@ -266,6 +267,15 @@ public void StopGrapple()
 
         characterInfo.SetStateText(_state.Stance.ToString());   
         characterInfo.SetFloatValue(currentVelocity.magnitude);
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", currentVelocity.magnitude);
+
+            animator.SetBool("IsGrounded", _state.Grounded);
+            animator.SetBool("IsCrouching", _state.Stance == Stance.Crouch);
+            animator.SetBool("IsSliding", _state.Stance == Stance.Slide);
+            animator.SetBool("IsSprinting", _state.Stance == Stance.Sprint);
+        }
         _state.Acceleration = Vector3.zero;
  if (_isGrappling)
 {
@@ -504,6 +514,11 @@ public void StopGrapple()
         {
             var grounded = motor.GroundingStatus.IsStableOnGround;
             var canCoyoteJump = _timeSinceUngrounded < coyoteTime && !_ungroundedDueToJump;
+            
+            if (animator != null)
+            {
+                animator.SetTrigger("Jump");
+            }
 
             if (grounded || canCoyoteJump)
             {

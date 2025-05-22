@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 124003387771610928, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
+      propertyPath: ammo
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 124003387771610928, guid: 9e9c8adab9c4b41779b7752ed6f16778, type: 3}
       propertyPath: BulletTrail
       value: 
       objectReference: {fileID: 328621789431213768, guid: fb64712b76ae24741bc1c4e8c16b6df7, type: 3}

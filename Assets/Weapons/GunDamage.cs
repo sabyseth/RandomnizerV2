@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class GunDamage : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class GunDamage : MonoBehaviour
     //[SerializeField] private Animator animator;
     private Animation anim;
     private InputAction fireAction;
+    private InputAction Reload;
     public float Damage;
     public Recoil RecoilObject;
     public float BulletRange;
@@ -28,13 +31,21 @@ public class GunDamage : MonoBehaviour
     public bool revolver;
     public int BurstCount = 3; 
     public float BurstInterval = 0.1f; 
+    public int ammo; 
+    public Text ammoDisplay;
+    private int clip;
+    
+    public int BurstCount = 3; 
+    public float BurstInterval = 0.1f; 
     private bool isBursting = false;
     public bool randum;
 
     private void Awake()
     {
         
+   
         fireAction = playerInput.actions["Fire"];
+        Reload = playerInput.actions["Reload"];
         PlayerCamera = Camera.main.transform;
        // if (animator == null) animator = GetComponent<Animator>();
    // animator.SetBool("cocked", false);
@@ -42,18 +53,24 @@ public class GunDamage : MonoBehaviour
         if (randum){
             double x = Random.Range(1, 10); 
         }
+        clip = ammo;  
     }
 
     private void Update()
     {
+        if (ammoDisplay != null)
+        {
+            ammoDisplay.text = ammo.ToString();
+        }
         if (fireAction.IsPressed()) 
         {
-            if (CurrentCoolDown <= 0f)
+            if (CurrentCoolDown <= 0f && ammo > 0) 
             {
                 if (burst == true){
                 if (!isBursting) 
                 {
                     StartCoroutine(BurstFire());
+                    StartCoroutine(BurstFire()); 
                 }
                 }
                 if (revolver == true){
@@ -64,14 +81,21 @@ public class GunDamage : MonoBehaviour
                 CurrentCoolDown = FireCoolDown;
                 }
                 else {
+
+                    ammo--;
                     Shoot();
                CurrentCoolDown = FireCoolDown;
 
                 }
             }
         }
+        if (Reload.IsInProgress())
+        {
+            ammo =+ clip; 
+        }
 
         
+    
         CurrentCoolDown -= Time.deltaTime;
     }
 
@@ -83,6 +107,8 @@ public class GunDamage : MonoBehaviour
         {
             Shoot();  
             yield return new WaitForSeconds(BurstInterval); 
+            Shoot();  
+            yield return new WaitForSeconds(BurstInterval);  
         }
 
        
@@ -100,20 +126,27 @@ public class GunDamage : MonoBehaviour
         Ray gunRay = new Ray(bulletSpawnPoint.position, bulletSpawnPoint.forward);
         Debug.Log("Shot");
         //animator.SetBool("cocked", false);
+
+        
         if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
         {
             
             TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             StartCoroutine(SpawnTrail(trail, hitInfo.point)); 
+            StartCoroutine(SpawnTrail(trail, hitInfo.point)); 
+             
             if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
             {
                 enemy.Health -= Damage;
+               
             }
         }
         else
         {
             
             Vector3 missPoint = gunRay.origin + gunRay.direction * BulletRange;
+
+            
             TrailRenderer trail = Instantiate(BulletTrail, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             StartCoroutine(SpawnTrail(trail, missPoint)); 
         }

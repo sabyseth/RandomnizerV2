@@ -53,6 +53,10 @@ PrefabInstance:
       value: Famas Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6205949352227626701, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
+      propertyPath: ammo
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205949352227626701, guid: 959ddc8ad9920446d8f43016f9d4df56, type: 3}
       propertyPath: MuzzleFlash
       value: 
       objectReference: {fileID: 8114130988814806033}
