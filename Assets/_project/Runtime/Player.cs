@@ -46,7 +46,6 @@ public class Player : NetworkBehaviour
     }
     void Update()
     {  
-        //Debug.Log("sdlkfjsdlfk");
         if(!IsOwner) return;
         if(!IsLocalPlayer) return;
         var input = _inputActions.Gameplay;
